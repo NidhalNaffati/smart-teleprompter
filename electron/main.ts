@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain } from "electron";
+import { app, BrowserWindow } from "electron";
 import path from "node:path";
 import childProcess from "child_process";
 
@@ -41,12 +41,11 @@ function createWindow() {
 
   // Listen for messages from the child process
   serverProcess.on("message", (message) => {
-    if (message.recognizedText) {
-      // Handle recognized text from the child process
-      console.log("Recognized Text:", message.recognizedText);
-    } else if (message.partialResult) {
-      // Handle partial result from the child process
-      console.log("Partial Result:", message.partialResult);
+    if (message.partialResult) {
+      const partialResult = message.partialResult.partial; // Extract the 'partial' value as a string
+      // Send the partial result to the renderer process
+      win?.webContents.send("recognized-text", partialResult);
+      console.log("partial-result: ", partialResult);
     }
   });
 
@@ -58,36 +57,6 @@ function createWindow() {
   // Handle server process exit
   serverProcess.on("exit", (code, signal) => {
     console.log(`Server process exited with code ${code} and signal ${signal}`);
-  });
-
-  // Handle server process output
-  //serverProcess.stdout?.on("data", (data) => {
-  //  console.log(data);
-  //});
-
-  ipcMain.on("message", (event, message) => {
-    console.log("Received message from renderer process:", message);
-  });
-
-  // Add this code in your main.ts file
-  ipcMain.on("transcription-data", (event, data) => {
-    // Handle the transcription data received from the child process
-    console.log("Received transcription data:", data);
-
-    // You can send this data to your renderer process if needed
-    if (win) {
-      win.webContents.send("transcription-data", data);
-    }
-  });
-
-  ipcMain.on("transcription-partial", (event, partialData) => {
-    // Handle the partial transcription data received from the child process
-    console.log("Received partial transcription data:", partialData);
-
-    // You can send this data to your renderer process if needed
-    if (win) {
-      win.webContents.send("transcription-partial", partialData);
-    }
   });
 }
 
