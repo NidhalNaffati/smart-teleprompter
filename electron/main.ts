@@ -45,7 +45,7 @@ function createWindow() {
       const partialResult = message.partialResult.partial; // Extract the 'partial' value as a string
       // Send the partial result to the renderer process
       win?.webContents.send("recognized-text", partialResult);
-      console.log("partial-result: ", partialResult);
+      console.log(">> ", partialResult);
     }
   });
 
