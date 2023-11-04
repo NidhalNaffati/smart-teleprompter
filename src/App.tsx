@@ -3,6 +3,7 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/electron-vite.animate.svg";
 import "./App.css";
 import { IpcRenderer } from "electron";
+import { isWordSimilar } from "./utils/wordSimilarity";
 
 const ipcRenderer = (window as any).ipcRenderer as IpcRenderer;
 
@@ -34,20 +35,22 @@ function App() {
     return referenceWords.map((referenceWord, i) => {
       const userWord = userWords[i];
 
-      // Determine if the word matches the reference word
-      const isWordSpelledCorrectly: boolean = userWord === referenceWord;
+      // Determine if the word matches the reference word with a 70% or more similarity
+      const isWordSpelledCorrectly: boolean = isWordSimilar(
+        userWord,
+        referenceWord,
+        70
+      );
 
       // Set the color and font weight based on the match status
       const color = isWordSpelledCorrectly ? "#00ff00" : "#ff0000";
       const fontWeight = isWordSpelledCorrectly ? "bold" : "normal";
-
 
       return (
         <span key={i} style={{ color, fontWeight }}>
           {referenceWord}{" "}
         </span>
       );
-
     });
   };
 
