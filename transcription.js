@@ -43,6 +43,9 @@ var micInputStream = micInstance.getAudioStream();
 // Modify the code inside the micInputStream.on("data") event handler to send data to the parent process
 // process.stdout.write(rec.result() + "\n");
 
+// Initialize last recognized prompt
+let lastRecognizedPrompt = "";
+
 // listen to the data event of the microphone stream
 micInputStream.on("data", (data) => {
   if (rec.acceptWaveform(data)) {
@@ -51,13 +54,16 @@ micInputStream.on("data", (data) => {
     if (recognizedText && recognizedText.text.length > 0)
       process.send({ recognizedText }); // Send recognized text to the main process via IPC
   } else {
+    // get the partial result of the recognizer
     const partialResult = rec.partialResult();
     // send the partial result to the main process via IPC, if the recognizer has recognized the speech and its not an empty string
     if (partialResult && partialResult.partial.length > 0)
-      process.send({ partialResult }); // Send partial result to the main process via IPC
+      if (lastRecognizedPrompt !== partialResult.partial) {
+        process.send({ partialResult }); // Send partial result to the main process via IPC
+        lastRecognizedPrompt = partialResult.partial;
+      }
   }
 });
-
 
 // When the microphone stops, stop the recognizer and free the model
 micInputStream.on("audioProcessExitComplete", function () {
