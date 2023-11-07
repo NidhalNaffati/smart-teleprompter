@@ -10,6 +10,11 @@ const ipcRenderer = (window as any).ipcRenderer as IpcRenderer;
 function App() {
   const [, setRecognizedText] = useState<string>("");
   const [userWords, setUserWords] = useState<string[]>([]);
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+
+  const referenceText: string =
+    "hello everyone today we are going to discuss how this application works and how we can improve it in the future";
+  const referenceWords: string[] = referenceText.split(" ");
 
   // Listen for messages from the main process and update the state when received
   useEffect(() => {
@@ -20,16 +25,15 @@ function App() {
       // Split the recognized text into words
       const recognizedWords = text.split(" ");
       setUserWords(recognizedWords);
+
+      // Increment the current word index
+      setCurrentWordIndex((prevIndex) => prevIndex + 1);
     });
 
     return () => {
       ipcRenderer.removeAllListeners("recognized-text");
     };
   }, []);
-
-  const referenceText: string =
-    "hello everyone today we are going to discuss how this application works and how we can improve it in the future";
-  const referenceWords: string[] = referenceText.split(" ");
 
   const renderComparison = () => {
     return referenceWords.map((referenceWord, i) => {
@@ -46,8 +50,15 @@ function App() {
       const color = isWordSpelledCorrectly ? "#00ff00" : "#ff0000";
       const fontWeight = isWordSpelledCorrectly ? "bold" : "normal";
 
+      // set the text decoration based on the current word index
+      const textDecoration = i === currentWordIndex ? "underline" : "none";
+
       return (
-        <span key={i} style={{ color, fontWeight }}>
+        <span
+          key={i}
+          style={{ color, fontWeight, textDecoration, cursor: "pointer" }}
+          onClick={() => setCurrentWordIndex(i)}
+        >
           {referenceWord}{" "}
         </span>
       );
