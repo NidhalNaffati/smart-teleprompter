@@ -56,9 +56,6 @@ export const isWordSimilar = (
 
   similarityPercentage.toFixed(2);
 
-  // Step 5: Log the two words and their similarity percentage
-  console.log(`${userWord} :: ${referenceWord} = ${similarityPercentage}%`);
-
-  // Step 6: Compare with the provided percentage and return a boolean
+  // Step 5: Compare with the provided percentage and return a boolean
   return similarityPercentage >= percentage;
 };
