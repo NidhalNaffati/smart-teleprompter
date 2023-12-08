@@ -1,79 +1,72 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/electron-vite.animate.svg";
 import "./App.css";
-import { IpcRenderer } from "electron";
-import { isWordSimilar } from "./utils/wordSimilarity";
+import {IpcRenderer} from "electron";
+import {isWordSimilar} from "./utils/wordSimilarity";
 
 const ipcRenderer = (window as any).ipcRenderer as IpcRenderer;
 
 function App() {
-  const [, setRecognizedText] = useState<string>("");
-  const [userWords, setUserWords] = useState<string[]>([]);
-  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [recognizedText, setRecognizedText] = useState<string>("");
+  let recognizedWords = recognizedText.split(" ");
 
-  const referenceText: string =
-    "hello everyone today we are going to discuss how this application works and how we can improve it in the future";
+  const referenceText: string = "hello everyone today we are going to discuss how this application works and how we can improve it in the future";
   const referenceWords: string[] = referenceText.split(" ");
 
   // Listen for messages from the main process and update the state when received
   useEffect(() => {
     ipcRenderer.on("recognized-text", (_event, text) => {
-      console.log("text", text);
+      // Update the recognized text
       setRecognizedText(text);
 
-      // Split the recognized text into words
-      const recognizedWords = text.split(" ");
-      setUserWords(recognizedWords);
-
-      // Increment the current word index
-      setCurrentWordIndex((prevIndex) => prevIndex + 1);
+      // Update the recognized words
+      recognizedWords = recognizedText.split(" ");
     });
 
+    // Remove the listener when the component unmounts
     return () => {
       ipcRenderer.removeAllListeners("recognized-text");
     };
   }, []);
 
-  const renderComparison = () => {
-    return referenceWords.map((referenceWord, i) => {
-      const userWord = userWords[i];
 
-      // Determine if the word matches the reference word with a 70% or more similarity
-      const isWordSpelledCorrectly: boolean = isWordSimilar(
-        userWord,
-        referenceWord,
-        70
-      );
+  function renderComparison() {
+    return referenceWords.map(
+      (referenceWord, i) => {
+        const userWord = recognizedWords[i];
 
-      // Set the color and font weight based on the match status
-      const color = isWordSpelledCorrectly ? "#00ff00" : "#ff0000";
-      const fontWeight = isWordSpelledCorrectly ? "bold" : "normal";
+        // Determine if the word matches the reference word with a 70% or more similarity
+        const isWordSpelledCorrectly: boolean = isWordSimilar(
+          userWord,
+          referenceWord,
+          70
+        );
 
-      // set the text decoration based on the current word index
-      const textDecoration = i === currentWordIndex ? "underline" : "none";
+        // Set the color and font weight based on the match status
+        const color = isWordSpelledCorrectly ? "#00ff00" : "#ff0000";
+        const fontWeight = isWordSpelledCorrectly ? "bold" : "normal";
 
-      return (
-        <span
-          key={i}
-          style={{ color, fontWeight, textDecoration, cursor: "pointer" }}
-          onClick={() => setCurrentWordIndex(i)}
-        >
+        return (
+          <span
+            key={i}
+            style={{color, fontWeight, cursor: "pointer"}}
+          >
           {referenceWord}{" "}
         </span>
-      );
-    });
-  };
+        );
+      });
+  }
 
   return (
     <>
       <div>
         <div>
           <a href="https://electron-vite.github.io" target="_blank">
-            <img src={viteLogo} className="logo" alt="Vite logo" />
+            <img src={viteLogo} className="logo" alt="Vite logo"/>
           </a>
           <a href="https://react.dev" target="_blank">
-            <img src={reactLogo} className="logo react" alt="React logo" />
+            <img src={reactLogo} className="logo react" alt="React logo"/>
           </a>
         </div>
       </div>
