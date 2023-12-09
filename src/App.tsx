@@ -9,7 +9,7 @@ const ipcRenderer = (window as any).ipcRenderer as IpcRenderer;
 
 function App() {
   const [recognizedText, setRecognizedText] = useState<string>("");
-  let recognizedWords = recognizedText.split(" ");
+  const [recognizedWords, setRecognizedWords] = useState<string[]>([]);
 
   const referenceText: string = "hello everyone today we are going to discuss how this application works and how we can improve it in the future";
   const referenceWords: string[] = referenceText.split(" ");
@@ -19,9 +19,6 @@ function App() {
     ipcRenderer.on("recognized-text", (_event, text) => {
       // Update the recognized text
       setRecognizedText(text);
-
-      // Update the recognized words using the text parameter directly
-      recognizedWords = text.split(" ");
     });
 
     // Remove the listener when the component unmounts
@@ -30,6 +27,10 @@ function App() {
     };
   }, []);
 
+  // Update the recognized words using the recognizedText state
+  useEffect(() => {
+    setRecognizedWords(recognizedText.split(" "));
+  }, [recognizedText]);
 
   function renderComparison() {
     return referenceWords.map(
