@@ -20,8 +20,8 @@ function App() {
       // Update the recognized text
       setRecognizedText(text);
 
-      // Update the recognized words
-      recognizedWords = recognizedText.split(" ");
+      // Update the recognized words using the text parameter directly
+      recognizedWords = text.split(" ");
     });
 
     // Remove the listener when the component unmounts
