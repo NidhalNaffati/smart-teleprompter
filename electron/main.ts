@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from "electron";
+import {app, BrowserWindow} from "electron";
 import path from "node:path";
 import childProcess from "child_process";
 
@@ -39,8 +39,15 @@ function createWindow() {
     }
   );
 
+  // Define interfaces for the message structure
+  interface PartialResultMessage {
+    partialResult: {
+      partial: string;
+    };
+  }
+
   // Listen for messages from the child process
-  serverProcess.on("message", (message) => {
+  serverProcess.on("message", (message: PartialResultMessage) => {
     if (message.partialResult) {
       const partialResult = message.partialResult.partial; // Extract the 'partial' value as a string
       // Send the partial result to the renderer process
