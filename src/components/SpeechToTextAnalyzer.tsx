@@ -1,7 +1,7 @@
 import "../App.css";
 import {useEffect, useState} from "react";
 import {IpcRenderer} from "electron";
-import {isWordSimilar} from "../utils/wordSimilarity";
+import {isWordSimilar} from "../utils/word-similarity.ts";
 
 const ipcRenderer = (window as any).ipcRenderer as IpcRenderer;
 
