@@ -2,6 +2,7 @@ import "./App.css";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/electron-vite.animate.svg";
 import SpeechToTextAnalyzer from "./components/SpeechToTextAnalyzer.tsx";
+import VoskControl from "./components/VoskControl.tsx";
 
 function App() {
   return (
@@ -15,6 +16,10 @@ function App() {
             <img src={reactLogo} className="logo react" alt="React logo"/>
           </a>
         </div>
+      </div>
+
+      <div>
+        <VoskControl/>
       </div>
 
       <div>
