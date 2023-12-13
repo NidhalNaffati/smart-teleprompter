@@ -36,6 +36,8 @@ function startVoskProcess(win: BrowserWindow) {
 
     if (started !== undefined) {
       console.log(started ? "Vosk started  ✅ " : "Vosk starting failed ❌");
+      console.log("Sending vosk-status to renderer process \n vosk started")
+      win?.webContents.send("vosk-status", true);
     }
 
     if (error !== undefined) {
@@ -75,7 +77,8 @@ function startVoskProcess(win: BrowserWindow) {
 }
 
 // Stop the Vosk process
-function stopVoskProcess(voskProcess: childProcess.ChildProcess) {
+function stopVoskProcess(voskProcess: childProcess.ChildProcess, win: BrowserWindow) {
+  win?.webContents.send("vosk-status", false);
   if (voskProcess) {
     console.log("Killing Vosk process...");
     voskProcess.kill();

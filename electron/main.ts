@@ -37,7 +37,7 @@ function createWindow() {
   });
 
   ipcMain.on("stop-recognition", () => {
-    stopVoskProcess(voskProcess!)
+    stopVoskProcess(voskProcess!, win!)
   });
 }
 
