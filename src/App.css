@@ -5,6 +5,20 @@
   text-align: center;
 }
 
+.comparison-word {
+  transition: color 0.3s ease-in-out, font-weight 0.3s ease-in-out;
+}
+
+.matched {
+  color: #00ff00;
+  font-weight: bold;
+}
+
+.mismatched {
+  color: #ff0000;
+  font-weight: normal;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;

@@ -51,27 +51,19 @@ function SpeechToTextAnalyzer() {
 
 
   function renderComparison() {
-    return referenceWords.map(
-      (referenceWord, i) => {
-        const userWord = recognizedWords[i];
+    return referenceWords.map((referenceWord, i) => {
+      const userWord = recognizedWords[i];
+      const isWordSpelledCorrectly = isWordSimilar(userWord, referenceWord, 70);
 
-        // Determine if the word matches the reference word with a 70% or more similarity
-        const isWordSpelledCorrectly: boolean = isWordSimilar(
-          userWord,
-          referenceWord,
-          70
-        );
-
-        // Set the color and font weight based on the match status
-        const color = isWordSpelledCorrectly ? "#00ff00" : "#ff0000";
-        const fontWeight = isWordSpelledCorrectly ? "bold" : "normal";
-
-        return (
-          <span key={i} style={{color, fontWeight, cursor: "pointer"}}>
-            {referenceWord}{" "}
-          </span>
-        );
-      });
+      return (
+        <span
+          key={i}
+          className={`comparison-word ${isWordSpelledCorrectly ? "matched" : "mismatched"}`}
+        >
+          {referenceWord}{" "}
+        </span>
+      );
+    });
   }
 
   return (
