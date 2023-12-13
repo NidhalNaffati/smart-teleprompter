@@ -42,7 +42,7 @@ function SpeechToTextAnalyzer() {
   // Update the recognized words using the recognizedText state
   useEffect(() => {
     setRecognizedWords(recognizedText.split(" "));
-  }, [recognizedText, recognizedWords]);
+  }, [recognizedText]);
 
   // Update the starting word using the lastRecognizedText state
   useEffect(() => {
