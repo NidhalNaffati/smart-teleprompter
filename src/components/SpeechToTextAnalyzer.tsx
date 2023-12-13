@@ -1,4 +1,4 @@
-import "../styles/App.css";
+import "../styles/SpeechToTextAnalyzer.css";
 import {useEffect, useState} from "react";
 import {IpcRenderer} from "electron";
 import {isWordSimilar} from "../utils/word-similarity.ts";
@@ -42,13 +42,19 @@ function SpeechToTextAnalyzer() {
   // Update the recognized words using the recognizedText state
   useEffect(() => {
     setRecognizedWords(recognizedText.split(" "));
-  }, [recognizedText]);
+  }, [recognizedText, recognizedWords]);
 
   // Update the starting word using the lastRecognizedText state
   useEffect(() => {
     setStartingWord(lastRecognizedText.split(" ")[0]);
   }, [lastRecognizedText]);
 
+  function handleResetClick() {
+    setRecognizedText("");
+    setRecognizedWords([]);
+    setLastRecognizedText("");
+    setStartingWord("");
+  }
 
   function renderComparison() {
     return referenceWords.map((referenceWord, i) => {
@@ -70,6 +76,7 @@ function SpeechToTextAnalyzer() {
     <>
       <div>
         <h2>{renderComparison()}</h2>
+        <button onClick={handleResetClick}>Reset</button>
       </div>
     </>
   );
