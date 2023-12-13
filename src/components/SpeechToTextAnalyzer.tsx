@@ -1,4 +1,4 @@
-import "../styles/App.css";
+import "../App.css";
 import {useEffect, useState} from "react";
 import {IpcRenderer} from "electron";
 import {isWordSimilar} from "../utils/word-similarity.ts";
