@@ -10,12 +10,19 @@ const MODEL_PATH = "model";
 const SAMPLE_RATE = 16000;
 
 function checkModelExists() {
-  if (!fs.existsSync(MODEL_PATH)) {
+  if (!fs.existsSync(MODEL_PATH)) { // Check if the model exists
     console.error(
       `Please download the model from https://alphacephei.com/vosk/models and unpack as "${MODEL_PATH}" in the current folder.`
     );
+    // Send model exists message to the main process via IPC
+    process.send({modelExists: false});
+    // Send error message to the main process via IPC
+    process.send({error: `Model does not exist in path "${MODEL_PATH}"`});
     process.exit(1);
   }
+
+  // Send model exists message to the main process via IPC
+  process.send({modelExists: true});
 }
 
 function stopVosk(voskObjects) {
@@ -26,10 +33,25 @@ function stopVosk(voskObjects) {
 
 // Main functions
 function startVosk() {
+
   checkModelExists();
 
+  vosk.setLogLevel(1);
+
+  let model;
+
   // Create a Vosk model and recognizer
-  const model = new vosk.Model(MODEL_PATH);
+  try {
+    model = new vosk.Model(MODEL_PATH);
+    // Send loading message to the main process via IPC
+    process.send({modelLoaded: true})
+  } catch (error) {
+    console.error(error);
+    // Send model loaded message to the main process via IPC
+    process.send({modelLoaded: false});
+    process.send({error: error.message});
+  }
+
   const rec = new vosk.Recognizer({model, sampleRate: SAMPLE_RATE});
 
   // Create and start a microphone instance
@@ -80,7 +102,17 @@ function startVosk() {
   });
 
   // Start the microphone
-  micInstance.start();
+  try {
+    console.log("Starting...");
+    micInstance.start();
+    // Send started message to the main process via IPC
+    process.send({started: true});
+  } catch (error) {
+    console.error(error);
+    process.send({started: false});
+    process.send({error: error.message});
+  }
+
 }
 
 // Start the Vosk recognizer

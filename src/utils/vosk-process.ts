@@ -10,9 +10,39 @@ function startVoskProcess(win: BrowserWindow) {
     "node",
     ["--inspect", path.join(__dirname, "../transcription.js")],
     {
-      stdio: ["pipe", "pipe", "pipe", "ipc"], // Establish IPC channel
+      stdio: ["pipe", "pipe", process.stdout, "ipc"],
     }
   );
+
+  // Define interfaces for the message structure
+  interface Message {
+    modelExists?: boolean;
+    modelLoaded?: boolean;
+    started?: boolean;
+    error?: string;
+  }
+
+  // Listen for messages from the child process and log them
+  voskProcess.on("message", (message: Message) => {
+    const {modelExists, modelLoaded, started, error} = message;
+
+    if (modelExists !== undefined) {
+      console.log(modelExists ? "Model exists ✅ " : "Model does not exist ❌");
+    }
+
+    if (modelLoaded !== undefined) {
+      console.log(modelLoaded ? "Model loaded  ✅ " : "Model loading failed ❌");
+    }
+
+    if (started !== undefined) {
+      console.log(started ? "Vosk started  ✅ " : "Vosk starting failed ❌");
+    }
+
+    if (error !== undefined) {
+      console.log(error);
+    }
+  });
+
 
   // Define interfaces for the message structure
   interface PartialResultMessage {
