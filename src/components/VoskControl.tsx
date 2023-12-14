@@ -1,32 +1,40 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import {IpcRenderer} from "electron";
+import MicState from "./MicState.tsx";
 
 const ipcRenderer = (window as any).ipcRenderer as IpcRenderer;
 
 function VoskControl() {
   const [isRunning, setIsRunning] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    ipcRenderer.on("vosk-status", (_event, started) => {
+      console.log("Received vosk-status event: ", started ? "started" : "stopped");
+      setIsRunning(started);
+      setIsLoading(false); // Stop loading when status is received
+    });
+
+    return () => {
+      ipcRenderer.removeAllListeners("vosk-status");
+    };
+  }, []);
 
   function startVosk() {
-    // Send a message to the main process to start the Vosk process
+    setIsLoading(true); // Start loading when the button is clicked
     ipcRenderer.send("start-recognition");
-
-    // Update the state to indicate that Vosk is running
-    setIsRunning(true);
   }
 
   function stopVosk() {
-    // Send a message to the main process to stop the Vosk process
     ipcRenderer.send("stop-recognition");
-
-    // Update the state to indicate that Vosk is not running
-    setIsRunning(false);
   }
 
   return (
     <div>
-      <button onClick={isRunning ? stopVosk : startVosk}>
-        {isRunning ? "Stop Vosk" : "Start Vosk"}
+      <button onClick={isRunning ? stopVosk : startVosk} disabled={isLoading}>
+        {isLoading ? "Loading..." : isRunning ? "Stop Vosk" : "Start Vosk"}
       </button>
+      <MicState/>
     </div>
   );
 }
