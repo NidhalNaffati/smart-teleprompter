@@ -20,11 +20,11 @@ function SpeechToTextAnalyzer() {
       let newText: string;
 
       if (text.startsWith(startingWord)) { // Continue reading without interruption
-        // Set the recognized text to the last recognized text plus the new text
-        newText = recognizedText.replace(lastRecognizedText, "") + text;
+        // Set the recognized text based on the context
+        newText = lastRecognizedText ? recognizedText.replace(lastRecognizedText, text) : text;
       } else { // There is an interruption
         // Set the recognized text to the last recognized text plus the new text
-        newText = recognizedText + " " + text.replace(lastRecognizedText, "");
+        newText = recognizedText + " " + text;
       }
 
       setRecognizedText(newText);
