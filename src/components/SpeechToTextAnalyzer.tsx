@@ -2,6 +2,7 @@ import "../styles/SpeechToTextAnalyzer.css";
 import {useEffect, useState} from "react";
 import {IpcRenderer} from "electron";
 import {isWordSimilar} from "../utils/word-similarity.ts";
+import {resetTextStateVariables} from "../utils/speech-analyzer-utils";
 
 const ipcRenderer = (window as any).ipcRenderer as IpcRenderer;
 
@@ -49,27 +50,21 @@ function SpeechToTextAnalyzer() {
   }, [lastRecognizedText]);
 
   function handleResetClick() {
-    setRecognizedText("");
     setCurrentParagraphIndex(0);
-    setLastRecognizedText("");
-    setStartingWord("");
+    resetTextStateVariables(setRecognizedText, setLastRecognizedText, setStartingWord);
   }
 
-  function handleNextParagraph() {
+  function goToNextParagraph() {
     if (currentParagraphIndex < referenceParagraphs.length - 1) {
       setCurrentParagraphIndex(currentParagraphIndex + 1);
-      setRecognizedText("");
-      setLastRecognizedText("");
-      setStartingWord("");
+      resetTextStateVariables(setRecognizedText, setLastRecognizedText, setStartingWord)
     }
   }
 
-  function handlePreviousParagraph() {
+  function goToPreviousParagraph() {
     if (currentParagraphIndex > 0) {
       setCurrentParagraphIndex(currentParagraphIndex - 1);
-      setRecognizedText("");
-      setLastRecognizedText("");
-      setStartingWord("");
+      resetTextStateVariables(setRecognizedText, setLastRecognizedText, setStartingWord)
     }
   }
 
@@ -99,10 +94,10 @@ function SpeechToTextAnalyzer() {
     <>
       <div>
         <h2>{renderComparison()}</h2>
-        <button onClick={handlePreviousParagraph} disabled={isPreviousDisabled}>
+        <button onClick={goToPreviousParagraph} disabled={isPreviousDisabled}>
           ⬅️
         </button>
-        <button onClick={handleNextParagraph} disabled={isNextDisabled}>
+        <button onClick={goToNextParagraph} disabled={isNextDisabled}>
           ➡️
         </button>
         <button onClick={handleResetClick}>Reset</button>
