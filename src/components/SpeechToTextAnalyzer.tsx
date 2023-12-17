@@ -7,12 +7,16 @@ const ipcRenderer = (window as any).ipcRenderer as IpcRenderer;
 
 function SpeechToTextAnalyzer() {
   const [recognizedText, setRecognizedText] = useState<string>("");
-  const [recognizedWords, setRecognizedWords] = useState<string[]>([]);
   const [lastRecognizedText, setLastRecognizedText] = useState<string>("");
   const [startingWord, setStartingWord] = useState<string>("");
+  const [currentParagraphIndex, setCurrentParagraphIndex] = useState<number>(0);
 
-  const referenceText: string = "hello everyone today we are going to discuss how this application works and how we can improve it in the future";
-  const referenceWords: string[] = referenceText.split(" ");
+  const referenceText: string =
+    "hello everyone today we are going to discuss how this application works and how we can improve it in the future\n" +
+    "first of all this application is written in typescript react and electron\n" +
+    "this application uses the speech recognition from vosk and renders the text using react";
+
+  const referenceParagraphs: string[] = referenceText.split("\n");
 
   // Listen for messages from the main process and update the state when received
   useEffect(() => {
@@ -39,11 +43,6 @@ function SpeechToTextAnalyzer() {
     };
   }, [lastRecognizedText, recognizedText, startingWord]);
 
-  // Update the recognized words using the recognizedText state
-  useEffect(() => {
-    setRecognizedWords(recognizedText.split(" "));
-  }, [recognizedText]);
-
   // Update the starting word using the lastRecognizedText state
   useEffect(() => {
     setStartingWord(lastRecognizedText.split(" ")[0]);
@@ -51,12 +50,33 @@ function SpeechToTextAnalyzer() {
 
   function handleResetClick() {
     setRecognizedText("");
-    setRecognizedWords([]);
+    setCurrentParagraphIndex(0);
     setLastRecognizedText("");
     setStartingWord("");
   }
 
+  function handleNextParagraph() {
+    if (currentParagraphIndex < referenceParagraphs.length - 1) {
+      setCurrentParagraphIndex(currentParagraphIndex + 1);
+      setRecognizedText("");
+      setLastRecognizedText("");
+      setStartingWord("");
+    }
+  }
+
+  function handlePreviousParagraph() {
+    if (currentParagraphIndex > 0) {
+      setCurrentParagraphIndex(currentParagraphIndex - 1);
+      setRecognizedText("");
+      setLastRecognizedText("");
+      setStartingWord("");
+    }
+  }
+
   function renderComparison() {
+    const referenceParagraph = referenceParagraphs[currentParagraphIndex];
+    const referenceWords = referenceParagraph.split(" ");
+    const recognizedWords = recognizedText.split(" ");
     return referenceWords.map((referenceWord, i) => {
       const userWord = recognizedWords[i];
       const isWordSpelledCorrectly = isWordSimilar(userWord, referenceWord, 70);
@@ -72,10 +92,19 @@ function SpeechToTextAnalyzer() {
     });
   }
 
+  const isNextDisabled = currentParagraphIndex === referenceParagraphs.length - 1;
+  const isPreviousDisabled = currentParagraphIndex === 0;
+
   return (
     <>
       <div>
         <h2>{renderComparison()}</h2>
+        <button onClick={handlePreviousParagraph} disabled={isPreviousDisabled}>
+          ⬅️
+        </button>
+        <button onClick={handleNextParagraph} disabled={isNextDisabled}>
+          ➡️
+        </button>
         <button onClick={handleResetClick}>Reset</button>
       </div>
     </>
