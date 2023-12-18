@@ -2,7 +2,7 @@ import "../styles/SpeechToTextAnalyzer.css";
 import {useEffect, useState} from "react";
 import {IpcRenderer} from "electron";
 import {isWordSimilar} from "../utils/word-similarity.ts";
-import {resetTextStateVariables} from "../utils/speech-analyzer-utils";
+import {goToNextParagraphIfTheCurrentOneIsCompleted, resetTextStateVariables} from "../utils/speech-analyzer-utils";
 
 const ipcRenderer = (window as any).ipcRenderer as IpcRenderer;
 
@@ -34,11 +34,14 @@ function SpeechToTextAnalyzer() {
 
       setRecognizedText(newText);
       setLastRecognizedText(text);
+
+      // Go to the next paragraph if the current one is completed
+      goToNextParagraphIfTheCurrentOneIsCompleted(text, currentParagraphIndex, referenceParagraphs, goToNextParagraph);
     };
 
     ipcRenderer.on("recognized-text", handleRecognizedText);
 
-    // Remove the listener when the components unmounts
+    // Remove the listener when the components unmount
     return () => {
       ipcRenderer.removeAllListeners("recognized-text");
     };
