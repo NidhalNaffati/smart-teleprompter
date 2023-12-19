@@ -15,7 +15,8 @@ function SpeechToTextAnalyzer() {
   const referenceText: string =
     "hello everyone today we are going to discuss how this application works and how we can improve it in the future\n" +
     "first of all this application is written in typescript react and electron\n" +
-    "this application uses the speech recognition from vosk and renders the text using react";
+    "this application uses the speech recognition from vosk and renders the text using react\n" +
+    "the text is compared to the reference text and the matching words are highlighted\n";
 
   const referenceParagraphs: string[] = referenceText.split("\n");
 
@@ -71,6 +72,29 @@ function SpeechToTextAnalyzer() {
     }
   }
 
+  function renderPreviousParagraph() {
+    if (currentParagraphIndex > 0) {
+      return (
+        <div
+          className={`previous-paragraph ${currentParagraphIndex === referenceParagraphs.length - 2 ? "current-paragraph" : ""}`}>
+          <p>{referenceParagraphs[currentParagraphIndex - 1]}</p>
+        </div>
+      );
+    }
+  }
+
+  function renderNextParagraph() {
+    if (currentParagraphIndex < referenceParagraphs.length - 1) {
+      return (
+        <div
+          className={`next-paragraph ${currentParagraphIndex === referenceParagraphs.length - 2 ? "current-paragraph" : ""}`}>
+          <p>{referenceParagraphs[currentParagraphIndex + 1]}</p>
+        </div>
+      );
+    }
+  }
+
+
   function renderComparison() {
     const referenceParagraph = referenceParagraphs[currentParagraphIndex];
     const referenceWords = referenceParagraph.split(" ");
@@ -96,7 +120,9 @@ function SpeechToTextAnalyzer() {
   return (
     <>
       <div>
+        <h2>{renderPreviousParagraph()}</h2>
         <h2>{renderComparison()}</h2>
+        <h2>{renderNextParagraph()}</h2>
         <button onClick={goToPreviousParagraph} disabled={isPreviousDisabled}>
           ⬅️
         </button>

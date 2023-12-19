@@ -11,3 +11,17 @@
   color: #ff0000;
   font-weight: normal;
 }
+
+.current-paragraph {
+  opacity: 1;
+}
+
+
+.previous-paragraph,
+.next-paragraph {
+  opacity: 0.5;
+  transition: opacity 0.3s ease, color 0.3s ease, font-weight 0.3s ease;
+  color: #ff0000;
+  font-weight: normal;
+  pointer-events: none;
+}
