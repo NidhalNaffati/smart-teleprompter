@@ -1,3 +1,4 @@
+import "../styles/MicState.css";
 import {useEffect, useState} from "react";
 import {IpcRenderer} from "electron";
 
@@ -18,8 +19,8 @@ function MicState() {
   }, []);
 
   return (
-    <button disabled>
-      {isRunning ? "🎤 | ON" : "🎤 | OFF"}
+    <button className={`mic-icon ${isRunning ? "animated on" : "off"}`} disabled>
+      🎤 | {isRunning ? "ON" : "OFF"}
     </button>
   );
 
