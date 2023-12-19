@@ -1,8 +1,14 @@
 import "../styles/SpeechToTextAnalyzer.css";
-import {useEffect, useState} from "react";
-import {IpcRenderer} from "electron";
-import {isWordSimilar} from "../utils/word-similarity.ts";
-import {goToNextParagraphIfTheCurrentOneIsCompleted, resetTextStateVariables} from "../utils/speech-analyzer-utils";
+import { useEffect, useState } from "react";
+import { IpcRenderer } from "electron";
+import {
+  goToNextParagraphIfTheCurrentOneIsCompleted,
+  resetTextStateVariables,
+} from "../utils/speech-analyzer-utils";
+import PreviousParagraph from "./PreviousParagraph.tsx";
+import CurrentParagraphComparison from "./CurrentParagraphComparison.tsx";
+import NextParagraph from "./NextParagraph.tsx";
+import Navigation from "./Navigation.tsx";
 
 const ipcRenderer = (window as any).ipcRenderer as IpcRenderer;
 
@@ -25,10 +31,14 @@ function SpeechToTextAnalyzer() {
     const handleRecognizedText = (_event: any, text: string) => {
       let newText: string;
 
-      if (text.startsWith(startingWord)) { // Continue reading without interruption
+      if (text.startsWith(startingWord)) {
+        // Continue reading without interruption
         // Set the recognized text based on the context
-        newText = lastRecognizedText ? recognizedText.replace(lastRecognizedText, text) : text;
-      } else { // There is an interruption
+        newText = lastRecognizedText
+          ? recognizedText.replace(lastRecognizedText, text)
+          : text;
+      } else {
+        // There is an interruption
         // Set the recognized text to the last recognized text plus the new text
         newText = recognizedText + " " + text;
       }
@@ -37,7 +47,12 @@ function SpeechToTextAnalyzer() {
       setLastRecognizedText(text);
 
       // Go to the next paragraph if the current one is completed
-      goToNextParagraphIfTheCurrentOneIsCompleted(text, currentParagraphIndex, referenceParagraphs, goToNextParagraph);
+      goToNextParagraphIfTheCurrentOneIsCompleted(
+        text,
+        currentParagraphIndex,
+        referenceParagraphs,
+        goToNextParagraph
+      );
     };
 
     ipcRenderer.on("recognized-text", handleRecognizedText);
@@ -55,81 +70,64 @@ function SpeechToTextAnalyzer() {
 
   function handleResetClick() {
     setCurrentParagraphIndex(0);
-    resetTextStateVariables(setRecognizedText, setLastRecognizedText, setStartingWord);
+    resetTextStateVariables(
+      setRecognizedText,
+      setLastRecognizedText,
+      setStartingWord
+    );
   }
 
   function goToNextParagraph() {
     if (currentParagraphIndex < referenceParagraphs.length - 1) {
       setCurrentParagraphIndex(currentParagraphIndex + 1);
-      resetTextStateVariables(setRecognizedText, setLastRecognizedText, setStartingWord)
+      resetTextStateVariables(
+        setRecognizedText,
+        setLastRecognizedText,
+        setStartingWord
+      );
     }
   }
 
   function goToPreviousParagraph() {
     if (currentParagraphIndex > 0) {
       setCurrentParagraphIndex(currentParagraphIndex - 1);
-      resetTextStateVariables(setRecognizedText, setLastRecognizedText, setStartingWord)
-    }
-  }
-
-  function renderPreviousParagraph() {
-    if (currentParagraphIndex > 0) {
-      return (
-        <div
-          className={`previous-paragraph ${currentParagraphIndex === referenceParagraphs.length - 2 ? "current-paragraph" : ""}`}>
-          <p>{referenceParagraphs[currentParagraphIndex - 1]}</p>
-        </div>
+      resetTextStateVariables(
+        setRecognizedText,
+        setLastRecognizedText,
+        setStartingWord
       );
     }
   }
 
-  function renderNextParagraph() {
-    if (currentParagraphIndex < referenceParagraphs.length - 1) {
-      return (
-        <div
-          className={`next-paragraph ${currentParagraphIndex === referenceParagraphs.length - 2 ? "current-paragraph" : ""}`}>
-          <p>{referenceParagraphs[currentParagraphIndex + 1]}</p>
-        </div>
-      );
-    }
-  }
-
-
-  function renderComparison() {
-    const referenceParagraph = referenceParagraphs[currentParagraphIndex];
-    const referenceWords = referenceParagraph.split(" ");
-    const recognizedWords = recognizedText.split(" ");
-    return referenceWords.map((referenceWord, i) => {
-      const userWord = recognizedWords[i];
-      const isWordSpelledCorrectly = isWordSimilar(userWord, referenceWord, 70);
-
-      return (
-        <span
-          key={i}
-          className={`comparison-word ${isWordSpelledCorrectly ? "matched" : "mismatched"}`}
-        >
-          {referenceWord}{" "}
-        </span>
-      );
-    });
-  }
-
-  const isNextDisabled = currentParagraphIndex === referenceParagraphs.length - 1;
+  const isNextDisabled =
+    currentParagraphIndex === referenceParagraphs.length - 1;
   const isPreviousDisabled = currentParagraphIndex === 0;
 
   return (
     <>
       <div>
-        <h2>{renderPreviousParagraph()}</h2>
-        <h2>{renderComparison()}</h2>
-        <h2>{renderNextParagraph()}</h2>
-        <button onClick={goToPreviousParagraph} disabled={isPreviousDisabled}>
-          ⬅️
-        </button>
-        <button onClick={goToNextParagraph} disabled={isNextDisabled}>
-          ➡️
-        </button>
-        <button onClick={handleResetClick}>Reset</button>
+        <PreviousParagraph
+          currentParagraphIndex={currentParagraphIndex}
+          referenceParagraphs={referenceParagraphs}
+        />
+        <h2>
+          <CurrentParagraphComparison
+            recognizedText={recognizedText}
+            currentParagraphIndex={currentParagraphIndex}
+            referenceParagraphs={referenceParagraphs}
+          />
+        </h2>
+        <NextParagraph
+          currentParagraphIndex={currentParagraphIndex}
+          referenceParagraphs={referenceParagraphs}
+        />
+        <Navigation
+          goToPreviousParagraph={goToPreviousParagraph}
+          goToNextParagraph={goToNextParagraph}
+          reset={handleResetClick}
+          isPreviousDisabled={isPreviousDisabled}
+          isNextDisabled={isNextDisabled}
+        />
       </div>
     </>
   );
