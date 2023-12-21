@@ -1,3 +1,18 @@
+/**
+ * Calculates the Levenshtein distance between two input strings.
+ *
+ * The Levenshtein distance represents the minimum number of single-character
+ * edits (insertions, deletions, or substitutions) required to transform one
+ * string into another.
+ *
+ * @param {string} firstWord - The first input string.
+ * @param {string} secondWord - The second input string.
+ * @returns {number} Returns the Levenshtein distance between `firstWord` and `secondWord`.
+ *
+ * @example
+ * const distance = calculateLevenshteinDistance("kitten", "sitting");
+ * console.log(distance); // Output: 3
+ */
 const calculateLevenshteinDistance = (
   firstWord: string,
   secondWord: string
@@ -28,6 +43,20 @@ const calculateLevenshteinDistance = (
   return arr[secondWord.length][firstWord.length];
 };
 
+
+/**
+ * Determines whether two words are similar based on the Levenshtein distance
+ * and a specified similarity percentage threshold.
+ *
+ * @param {string | undefined} userWord - The user-provided word for comparison.
+ * @param {string} referenceWord - The reference word to compare against.
+ * @param {number} percentage - The minimum required similarity percentage.
+ * @returns {boolean} Returns true if the similarity percentage is greater than or equal to the specified threshold.
+ *
+ * @example
+ * const similar = isWordSimilar("kitten", "sitting", 60);
+ * console.log(similar); // Output: true
+ */
 export const isWordSimilar = (
   userWord: string,
   referenceWord: string,
