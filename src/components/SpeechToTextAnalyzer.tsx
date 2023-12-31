@@ -1,13 +1,11 @@
 import "../styles/SpeechToTextAnalyzer.css";
-import { useEffect, useState } from "react";
-import { IpcRenderer } from "electron";
+import {useEffect, useState} from "react";
+import {IpcRenderer} from "electron";
 import {
   goToNextParagraphIfTheCurrentOneIsCompleted,
   resetTextStateVariables,
 } from "../utils/speech-analyzer-utils";
-import PreviousParagraph from "./PreviousParagraph.tsx";
-import CurrentParagraphComparison from "./CurrentParagraphComparison.tsx";
-import NextParagraph from "./NextParagraph.tsx";
+import ScriptComparison from "./ScriptComparison.tsx";
 import Navigation from "./Navigation.tsx";
 
 const ipcRenderer = (window as any).ipcRenderer as IpcRenderer;
@@ -106,21 +104,6 @@ function SpeechToTextAnalyzer() {
   return (
     <>
       <div>
-        <PreviousParagraph
-          currentParagraphIndex={currentParagraphIndex}
-          referenceParagraphs={referenceParagraphs}
-        />
-        <h2>
-          <CurrentParagraphComparison
-            recognizedText={recognizedText}
-            currentParagraphIndex={currentParagraphIndex}
-            referenceParagraphs={referenceParagraphs}
-          />
-        </h2>
-        <NextParagraph
-          currentParagraphIndex={currentParagraphIndex}
-          referenceParagraphs={referenceParagraphs}
-        />
         <Navigation
           goToPreviousParagraph={goToPreviousParagraph}
           goToNextParagraph={goToNextParagraph}
@@ -128,6 +111,13 @@ function SpeechToTextAnalyzer() {
           isPreviousDisabled={isPreviousDisabled}
           isNextDisabled={isNextDisabled}
         />
+        <h2>
+          <ScriptComparison
+            recognizedText={recognizedText}
+            currentParagraphIndex={currentParagraphIndex}
+            referenceParagraphs={referenceParagraphs}
+          />
+        </h2>
       </div>
     </>
   );

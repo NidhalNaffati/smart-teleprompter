@@ -8,7 +8,7 @@ interface ComparisonProps {
   recognizedText: string;
 }
 
-const CurrentParagraphComparison: React.FC<ComparisonProps> = ({
+const ScriptComparison: React.FC<ComparisonProps> = ({
   currentParagraphIndex,
   referenceParagraphs,
   recognizedText,
@@ -41,4 +41,4 @@ const CurrentParagraphComparison: React.FC<ComparisonProps> = ({
   );
 };
 
-export default CurrentParagraphComparison;
+export default ScriptComparison;
