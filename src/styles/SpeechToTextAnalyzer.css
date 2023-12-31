@@ -12,10 +12,13 @@
   font-weight: normal;
 }
 
+.underline {
+  text-decoration: underline;
+}
+
 .current-paragraph {
   opacity: 1;
 }
-
 
 .previous-paragraph,
 .next-paragraph {
