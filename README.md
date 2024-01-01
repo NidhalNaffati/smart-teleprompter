@@ -1,4 +1,4 @@
-# smart-teleprompter
+# smart-teleprompter 💬🎥
 
 ***
 **_`السَّلامُ عَلَيْكُم ورَحْمَةُ اللهِ وَبَرَكاتُهُ`_** <br/>
@@ -42,15 +42,51 @@ This project is not just a tool, it's an empowering platform for:
 * **Anyone who wants to communicate effectively**: From live streams to video meetings, this solution empowers you to
   connect with your audience on a deeper level.
 
-
 ## Technologies Used
+
 Those are the main technologies used in this project:
 <img alt="main tech used" src="./docs/smart-telepromter-stuck.png"/>
 
 ## Architecture
+
 <img alt="app-architecture" src="./docs/app-architecture.gif"/>
 
 1. After uploading a script, the user initiates the process by clicking the "Start" button.
 2. The main process launches a child process to run Vosk, triggered by an event listener for the click.
 3. Vosk transcribes audio from the microphone, sending the results to the renderer process. <br>
    The renderer process, equipped with an event listener, then compares the transcribed text with the uploaded script.
+
+## Installation
+
+1. Make sure to have Node.js installed on your machine
+   You can install it using this link here [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
+
+2. Clone the repo from github using the following command
+   ```sh
+   git clone https://github.com/NidhalNaffati/smart-teleprompter.git
+   ```
+3. Install NPM packages
+   ```sh
+    cd smart-teleprompter && npm install
+    ```
+4. Install the Vosk model you want to use
+   from [https://alphacephei.com/vosk/models](https://alphacephei.com/vosk/models)
+5. Make sure to extract the model in the root directory of the project and rename it to `model`
+
+## Usage
+
+1. With in the `SpeechToTextAnalyzer` file in the `src/components` folder change the script that you want to read 📜 <br>
+   **Note**: Within the `SpeechToTextAnalyzer` make sure to use `\n` to indicate to separate paragraphs
+   Here is an example of a script:
+    ```typescript
+    const referenceText: string =
+    'Hello, my name is Nidhal Naffati. \n' +
+    'I am a software engineer\n' +
+    'I am passionate about building software that helps people and solves real world problems.';
+    ```
+2. Run the application with the following command
+   ```sh
+   npm run dev
+   ```
+3. Click on the start button to start the process
+4. Start reading the script and the application will highlight the words that you are reading
