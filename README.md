@@ -90,3 +90,28 @@ Those are the main technologies used in this project:
    ```
 3. Click on the start button to start the process
 4. Start reading the script and the application will highlight the words that you are reading
+
+## To Do
+
+The upcoming features planned for implementation in this project include:
+
+- [ ] Enable users to upload scripts from files 📁
+- [ ] Provide users with the option to select models (languages) from a list 🌐
+- [ ] Allow users to receive their transcriptions from the application, saved in a separate file 📝
+- [ ] Enable users to record their own voice 🎙
+- [ ] Implement the capability for users to record reading sessions as videos 📹
+- [ ] Allow users to customize font size and script color 🎨
+- [ ] Provide users with the ability to indicate problematic words during transcription
+
+## Contributing
+
+We welcome contributions to enhance and improve this project. If you have ideas, bug fixes, or new features to suggest,
+please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch for your contribution: git checkout -b feature/your-feature-name.
+3. Implement your changes and ensure the code is well-documented.
+4. Test your changes thoroughly.
+5. Create a pull request, detailing the purpose and scope of your contribution.
+
+Thank you for helping make this project better!
