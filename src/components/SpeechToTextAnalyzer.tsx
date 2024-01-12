@@ -8,7 +8,7 @@ import {
 import ScriptComparison from "./ScriptComparison.tsx";
 import Navigation from "./Navigation.tsx";
 
-const ipcRenderer = (window as any).ipcRenderer as IpcRenderer;
+const ipcRenderer: IpcRenderer = (window).ipcRenderer;
 
 function SpeechToTextAnalyzer() {
   const [recognizedText, setRecognizedText] = useState<string>("");
@@ -26,7 +26,7 @@ function SpeechToTextAnalyzer() {
 
   // Listen for messages from the main process and update the state when received
   useEffect(() => {
-    const handleRecognizedText = (_event: any, text: string) => {
+    const handleRecognizedText = (_event: Electron.IpcRendererEvent, text: string) => {
       let newText: string;
 
       if (text.startsWith(startingWord)) {
