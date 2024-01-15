@@ -4,7 +4,8 @@
 
 .matched {
   color: #00ff00;
-  font-weight: bold;
+  font-weight: normal;
+  text-shadow: 0 0 3px rgba(0, 255, 0, 0.5);
 }
 
 .mismatched {
@@ -14,17 +15,4 @@
 
 .underline {
   text-decoration: underline;
-}
-
-.current-paragraph {
-  opacity: 1;
-}
-
-.previous-paragraph,
-.next-paragraph {
-  opacity: 0.5;
-  transition: opacity 0.3s ease, color 0.3s ease, font-weight 0.3s ease;
-  color: #ff0000;
-  font-weight: normal;
-  pointer-events: none;
 }
