@@ -76,7 +76,8 @@ Those are the main technologies used in this project:
     cd smart-teleprompter && npm install
     ```
 4. Install the Vosk model you want to use
-   from [https://alphacephei.com/vosk/models](https://alphacephei.com/vosk/models)
+   from [https://alphacephei.com/vosk/models](https://alphacephei.com/vosk/models). <br>
+   for English speaker I highly recommend the [gigaspeech model](https://alphacephei.com/vosk/models/vosk-model-en-us-0.42-gigaspeech.zip) 
 5. Make sure to extract the model in the root directory of the project and rename it to `model`
 
 ## Usage
