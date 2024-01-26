@@ -42,6 +42,12 @@ This project is not just a tool, it's an empowering platform for:
 * **Anyone who wants to communicate effectively**: From live streams to video meetings, this solution empowers you to
   connect with your audience on a deeper level.
 
+## Demo
+
+https://github.com/NidhalNaffati/smart-teleprompter/assets/100954462/c3c4c67a-5d6a-4b22-a4ce-d3bf374aa3c2
+
+
+
 ## Technologies Used
 
 Those are the main technologies used in this project:
