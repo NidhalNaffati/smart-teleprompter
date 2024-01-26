@@ -17,10 +17,13 @@ function SpeechToTextAnalyzer() {
   const [currentParagraphIndex, setCurrentParagraphIndex] = useState<number>(0);
 
   const referenceText: string =
-    "hello everyone today we are going to discuss how this application works and how we can improve it in the future\n" +
-    "first of all this application is written in typescript react and electron\n" +
-    "this application uses the speech recognition from vosk and renders the text using react\n" +
-    "the text is compared to the reference text and the matching words are highlighted\n";
+    "hello everybody today i'm excited to introduce the beta version of my application as you can see it works as a smart teleprompter\n" +
+    "upon reading the script the application converts my speech into text and then compares it to the written text\n" +
+    "the application also features automatic navigation this means that when i finish reading a paragraph it automatically moves to the next one\n" +
+    "i designed this application for content creators eliminating the need to memorize scripts and providing an affordable alternative to traditional teleprompters\n" +
+    "moreover it's beneficial for students like me who are trying to enhance their pronunciation you can find the list of supported languages in the link i'll provide\n" +
+    "if you want to test this application you can follow the instructions in the read me file\n" +
+    "finally i would like to thank you for watching this video";
 
   const referenceParagraphs: string[] = referenceText.split("\n");
 
