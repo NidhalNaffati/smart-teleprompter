@@ -1,16 +1,15 @@
 import "./styles/App.css";
-import SpeechToTextAnalyzer from "./components/SpeechToTextAnalyzer.tsx";
-import VoskControl from "./components/VoskControl.tsx";
+import {Navbar} from "./components/Navbar.tsx";
+import AppRoutes from "./route/AppRoutes.tsx";
+import {BrowserRouter} from "react-router-dom";
 
 function App() {
   return (
     <>
-      <div className="vosk-control">
-        <VoskControl/>
-      </div>
-      <div>
-        <SpeechToTextAnalyzer/>
-      </div>
+      <BrowserRouter>
+          <Navbar/>
+          <AppRoutes/>
+      </BrowserRouter>
     </>
   );
 }
