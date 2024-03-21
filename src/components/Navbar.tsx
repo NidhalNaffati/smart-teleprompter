@@ -1,18 +1,17 @@
-import '../styles/navbar.css';
 import {Link} from 'react-router-dom';
 
 export function Navbar() {
   return (
-    <nav className="navbar">
-      <ul className="navbar-nav">
-        <li className="nav-item">
-          <Link to="/" className="nav-link">Home</Link>
+    <nav className="bg-gray-800 py-4">
+      <ul className="flex">
+        <li className="mr-4">
+          <Link to="/" className="text-white hover:text-gray-300">Home</Link>
         </li>
-        <li className="nav-item">
-          <Link to="/settings" className="nav-link">Settings</Link>
+        <li className="mr-4">
+          <Link to="/settings" className="text-white hover:text-gray-300">Settings</Link>
         </li>
-        <li className="nav-item">
-          <Link to="/transcription" className="nav-link">Transcription</Link>
+        <li className="mr-4">
+          <Link to="/transcription" className="text-white hover:text-gray-300">Transcription</Link>
         </li>
       </ul>
     </nav>

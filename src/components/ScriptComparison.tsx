@@ -1,6 +1,5 @@
 import React from "react";
 import {isWordSimilar} from "../utils/word-similarity.ts";
-import "../styles/SpeechToTextAnalyzer.css";
 
 interface ComparisonProps {
   currentParagraphIndex: number;
@@ -30,8 +29,11 @@ const ScriptComparison: React.FC<ComparisonProps> = ({
         return (
           <span
             key={i}
-            className={`comparison-word ${
-              isWordSpelledCorrectly ? "matched" : "mismatched"} ${i === recognizedWords.length - 1 ? "underline" : ""}`}
+            className={`text-2xl transition-colors ${
+              isWordSpelledCorrectly ? "text-green-500" : "text-red-500"
+            } ${
+              i === recognizedWords.length - 1 ? "underline" : ""
+            }`}
           >
             {referenceWord}{" "}
           </span>

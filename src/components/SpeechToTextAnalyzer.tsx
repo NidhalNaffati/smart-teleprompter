@@ -1,4 +1,3 @@
-import "../styles/SpeechToTextAnalyzer.css";
 import {useEffect, useState} from "react";
 import {IpcRenderer} from "electron";
 import {
