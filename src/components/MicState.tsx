@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {IpcRenderer} from "electron";
 
-const ipcRenderer = (window as any).ipcRenderer as IpcRenderer;
+const ipcRenderer: IpcRenderer = window.ipcRenderer;
 
 function MicState() {
 
