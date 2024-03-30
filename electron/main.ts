@@ -1,16 +1,13 @@
-import {app, BrowserWindow, ipcMain} from "electron";
+import {app, BrowserWindow} from "electron";
 import path from "node:path";
-import childProcess from "child_process";
-import {startVoskProcess, stopVoskProcess} from "../src/utils/vosk-process.ts";
+import {registerVoskIPC} from "./ipc/vosk.ts";
 
 process.env.DIST = path.join(__dirname, "../dist");
 process.env.VITE_PUBLIC = app.isPackaged
   ? process.env.DIST
   : path.join(process.env.DIST, "../public");
 
-let win: BrowserWindow | null = null;
-let voskProcess: childProcess.ChildProcess | null = null;
-
+let win: BrowserWindow;
 const VITE_DEV_SERVER_URL = process.env["VITE_DEV_SERVER_URL"];
 
 function createWindow() {
@@ -36,26 +33,14 @@ function createWindow() {
     win.loadFile(path.join(process.env.DIST, "index.html"));
   }
 
-  ipcMain.on("start-recognition", () => {
-    voskProcess = startVoskProcess(win!)
-  });
 
-  ipcMain.on("stop-recognition", () => {
-    stopVoskProcess(voskProcess!, win!)
-  });
+  // initialize IPC handlers for Vosk
+  registerVoskIPC(win);
 }
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
     app.quit();
-    win = null;
-
-    // Kill the server process when the Electron app is closed
-    if (voskProcess) {
-      console.log("Killing vosk process...");
-      voskProcess.kill();
-      voskProcess = null;
-    }
   }
 });
 
