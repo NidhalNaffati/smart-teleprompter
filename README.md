@@ -82,19 +82,11 @@ Those are the main technologies used in this project:
 
 ## Usage
 
-1. With in the `SpeechToTextAnalyzer` file in the `src/components` folder change the script that you want to read 📜 <br>
-   **Note**: Within the `SpeechToTextAnalyzer` make sure to use `\n` to indicate to separate paragraphs
-   Here is an example of a script:
-    ```typescript
-    const referenceText: string =
-    'Hello, my name is Nidhal Naffati. \n' +
-    'I am a software engineer\n' +
-    'I am passionate about building software that helps people and solves real world problems.';
-    ```
-2. Run the application with the following command
+1. Start the application with the following command
    ```sh
    npm run dev
    ```
+2. Write the script you want to read in the text area
 3. Click on the start button to start the process
 4. Start reading the script and the application will highlight the words that you are reading
 
