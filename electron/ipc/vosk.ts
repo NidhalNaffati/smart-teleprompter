@@ -1,6 +1,6 @@
 import { ipcMain, BrowserWindow } from "electron";
 import childProcess from "child_process";
-import { startVoskProcess, stopVoskProcess } from "../../src/utils/vosk-process/vosk-process.ts";
+import { startVoskProcess, stopVoskProcess } from "../utils/vosk-process/vosk-process.ts";
 
 let voskProcess: childProcess.ChildProcess;
 

@@ -8,7 +8,7 @@ function startVoskProcess(win: BrowserWindow) {
   // Spawn the Vosk process with Node inspector enabled
   const voskProcess = childProcess.spawn(
     "node",
-    ["--inspect", path.join(__dirname, "../src/utils/vosk-process/transcription.js")],
+    ["--inspect", path.join(__dirname, "../electron/utils/vosk-process/transcription.js")],
     {
       stdio: ["pipe", "pipe", process.stdout, "ipc"],
     }

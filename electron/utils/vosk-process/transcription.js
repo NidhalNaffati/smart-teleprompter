@@ -1,4 +1,3 @@
-// Import the required modules
 const vosk = require("vosk");
 const mic = require("mic");
 const fs = require("fs");
