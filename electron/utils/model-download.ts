@@ -1,5 +1,5 @@
 import path from "node:path";
-import { app, BrowserWindow } from "electron";
+import {app, BrowserWindow} from "electron";
 import fs from "fs";
 import https from "https";
 
@@ -14,7 +14,7 @@ export function downloadFile(url: string) {
     // Check if the directory exists, if not, create it
     if (!fs.existsSync(downloadDir)) {
       console.log(`Creating directory: ${downloadDir}`)
-      fs.mkdirSync(downloadDir, { recursive: true }); // Creating the directory recursively if it doesn't exist
+      fs.mkdirSync(downloadDir, {recursive: true}); // Creating the directory recursively if it doesn't exist
     }
 
     const file = fs.createWriteStream(downloadPath); // Creating a writable stream to write the downloaded data into a file
@@ -41,6 +41,7 @@ export function downloadFile(url: string) {
           if (window) {
             window.webContents.send('download-complete', "Download Complete from the main process"); // Sending a message to the renderer process indicating download completion
           }
+          extractFiles(downloadPath, downloadDir); // Extracting the downloaded zip file (assuming it's a zip file
         });
 
       } else {
@@ -56,5 +57,21 @@ export function downloadFile(url: string) {
     });
   } catch (error) {
     console.error(`Error downloading file: ${error}`); // Catching and logging any error occurred during the download process
+  }
+}
+
+// extract files from the downloaded zip
+import AdmZip from "adm-zip";
+
+function extractFiles(zipPath: string, extractDir: string) {
+  try {
+    const zip = new AdmZip(zipPath); // Creating a new instance of AdmZip with the downloaded zip file
+    zip.extractAllTo(extractDir, true); // Extracting the contents of the zip file to the provided directory
+    console.log(`Extracted files to: ${extractDir}`); // Logging the extraction completion
+  } catch (error) {
+    console.error(`Error extracting files: ${error}`); // Catching and logging any error occurred during the extraction process
+  } finally {
+    fs.unlinkSync(zipPath); // Deleting the downloaded zip file after extraction
+    console.log(`Deleted zip file: ${zipPath}`); // Logging the deletion of the zip file
   }
 }

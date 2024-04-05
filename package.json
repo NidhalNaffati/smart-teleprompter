@@ -9,13 +9,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "adm-zip": "^0.5.12",
     "mic": "^2.1.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.3",
+    "unzipper": "^0.10.14",
     "vosk": "^0.3.39"
   },
   "devDependencies": {
+    "@types/adm-zip": "^0.5.5",
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.6.0",
