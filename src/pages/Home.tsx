@@ -1,3 +1,5 @@
+import ModelDownload from "../components/ModelDownload.tsx";
+
 export default function Home() {
   return (
     <div>
@@ -7,6 +9,11 @@ export default function Home() {
           <p className="text-slate-500">You have a new message!</p>
         </div>
       </div>
+
+      <div>
+        <ModelDownload />
+      </div>
+
     </div>
   );
 }

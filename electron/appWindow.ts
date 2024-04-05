@@ -1,6 +1,7 @@
 import {app, BrowserWindow} from "electron";
 import path from "node:path";
 import {registerVoskIPC} from "./ipc/vosk.ts";
+import {registerModelDownloadIPC} from "./ipc/model-download.ts";
 
 process.env.DIST = path.join(__dirname, "../dist");
 process.env.VITE_PUBLIC = app.isPackaged
@@ -36,6 +37,9 @@ export function createWindow(): BrowserWindow {
 
   // initialize IPC handlers for Vosk
   registerVoskIPC(window);
+
+  // initialize IPC handlers for model download
+  registerModelDownloadIPC();
 
   return window;
 }
