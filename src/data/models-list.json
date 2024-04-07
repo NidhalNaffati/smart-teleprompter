@@ -1,0 +1,818 @@
+[
+    {
+        "Model": "English",
+        "URL": "",
+        "Size": "",
+        "Word error rate/Speed": "",
+        "Notes": "",
+        "License": ""
+    },
+    {
+        "Model": "vosk-model-small-en-us-0.15",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.15.zip",
+        "Size": "40M",
+        "Word error rate/Speed": "9.85 (librispeech test-clean) 10.38 (tedlium)",
+        "Notes": "Lightweight wideband model for Android and RPi",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "vosk-model-en-us-0.22",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-en-us-0.22.zip",
+        "Size": "1.8G",
+        "Word error rate/Speed": "5.69 (librispeech test-clean) 6.05 (tedlium) 29.78(callcenter)",
+        "Notes": "Accurate generic US English model",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "vosk-model-en-us-0.22-lgraph",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-en-us-0.22-lgraph.zip",
+        "Size": "128M",
+        "Word error rate/Speed": "7.82 (librispeech) 8.20 (tedlium)",
+        "Notes": "Big US English model with dynamic graph",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "vosk-model-en-us-0.42-gigaspeech",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-en-us-0.42-gigaspeech.zip",
+        "Size": "2.3G",
+        "Word error rate/Speed": "5.64 (librispeech test-clean) 6.24 (tedlium) 30.17 (callcenter)",
+        "Notes": "Accurate generic US English model trained by Kaldi on Gigaspeech. Mostly for podcasts, not for telephony",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "English Other",
+        "URL": "",
+        "Size": "",
+        "Word error rate/Speed": "Older Models",
+        "Notes": "",
+        "License": ""
+    },
+    {
+        "Model": "vosk-model-en-us-daanzu-20200905",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-en-us-daanzu-20200905.zip",
+        "Size": "1.0G",
+        "Word error rate/Speed": "7.08 (librispeech test-clean)  8.25 (tedlium)",
+        "Notes": "Wideband model for dictation from Kaldi-active-grammar project",
+        "License": "AGPL"
+    },
+    {
+        "Model": "vosk-model-en-us-daanzu-20200905-lgraph",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-en-us-daanzu-20200905-lgraph.zip",
+        "Size": "129M",
+        "Word error rate/Speed": "8.20 (librispeech test-clean) 9.28 (tedlium)",
+        "Notes": "Wideband model for dictation from Kaldi-active-grammar project with configurable graph",
+        "License": "AGPL"
+    },
+    {
+        "Model": "vosk-model-en-us-librispeech-0.2",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-en-us-librispeech-0.2.zip",
+        "Size": "845M",
+        "Word error rate/Speed": "TBD",
+        "Notes": "Repackaged Librispeech model from Kaldi, not very accurate",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "vosk-model-small-en-us-zamia-0.5",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-small-en-us-zamia-0.5.zip",
+        "Size": "49M",
+        "Word error rate/Speed": "11.55 (librispeech test-clean) 12.64 (tedlium)",
+        "Notes": "Repackaged Zamia model f_250, mainly for research",
+        "License": "LGPL-3.0"
+    },
+    {
+        "Model": "vosk-model-en-us-aspire-0.2",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-en-us-aspire-0.2.zip",
+        "Size": "1.4G",
+        "Word error rate/Speed": "13.64 (librispeech test-clean) 12.89 (tedlium) 33.82(callcenter)",
+        "Notes": "Kaldi original ASPIRE model, not very accurate",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "vosk-model-en-us-0.21",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-en-us-0.21.zip",
+        "Size": "1.6G",
+        "Word error rate/Speed": "5.43 (librispeech test-clean) 6.42 (tedlium) 40.63(callcenter)",
+        "Notes": "Wideband model previous generation",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "Indian English",
+        "URL": "",
+        "Size": "",
+        "Word error rate/Speed": "",
+        "Notes": "",
+        "License": ""
+    },
+    {
+        "Model": "vosk-model-en-in-0.5",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-en-in-0.5.zip",
+        "Size": "1G",
+        "Word error rate/Speed": "36.12 (NPTEL Pure)",
+        "Notes": "Generic Indian English model for telecom and broadcast",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "vosk-model-small-en-in-0.4",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-small-en-in-0.4.zip",
+        "Size": "36M",
+        "Word error rate/Speed": "49.05 (NPTEL Pure)",
+        "Notes": "Lightweight Indian English model for mobile applications",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "Chinese",
+        "URL": "",
+        "Size": "",
+        "Word error rate/Speed": "",
+        "Notes": "",
+        "License": ""
+    },
+    {
+        "Model": "vosk-model-small-cn-0.22",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-small-cn-0.22.zip",
+        "Size": "42M",
+        "Word error rate/Speed": "23.54 (SpeechIO-02) 38.29 (SpeechIO-06) 17.15 (THCHS)",
+        "Notes": "Lightweight model for Android and RPi",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "vosk-model-cn-0.22",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-cn-0.22.zip",
+        "Size": "1.3G",
+        "Word error rate/Speed": "13.98 (SpeechIO-02) 27.30 (SpeechIO-06) 7.43 (THCHS)",
+        "Notes": "Big generic Chinese model for server processing",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "Chinese Other",
+        "URL": "",
+        "Size": "",
+        "Word error rate/Speed": "",
+        "Notes": "",
+        "License": ""
+    },
+    {
+        "Model": "vosk-model-cn-kaldi-multicn-0.15",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-cn-kaldi-multicn-0.15.zip",
+        "Size": "1.5G",
+        "Word error rate/Speed": "17.44 (SpeechIO-02) 9.56 (THCHS)",
+        "Notes": "Original Wideband Kaldi multi-cn model from Kaldi with Vosk LM",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "Russian",
+        "URL": "",
+        "Size": "",
+        "Word error rate/Speed": "",
+        "Notes": "",
+        "License": ""
+    },
+    {
+        "Model": "vosk-model-ru-0.42",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-ru-0.42.zip",
+        "Size": "1.8G",
+        "Word error rate/Speed": "4.5 (our audiobooks) 11.1 (open_stt audiobooks) 19.5 (open_stt youtube) 36.0 (openstt calls) 4.4 (golos crowd) 17.9 (sova devices)",
+        "Notes": "Big mixed band Russian model for servers",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "vosk-model-small-ru-0.22",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-small-ru-0.22.zip",
+        "Size": "45M",
+        "Word error rate/Speed": "22.71 (openstt audiobooks) 31.97 (openstt youtube) 29.89 (sova devices) 11.79 (golos crowd)",
+        "Notes": "Lightweight wideband model for Android/iOS and RPi",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "Russian Other",
+        "URL": "",
+        "Size": "",
+        "Word error rate/Speed": "",
+        "Notes": "",
+        "License": ""
+    },
+    {
+        "Model": "vosk-model-ru-0.22",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-ru-0.22.zip",
+        "Size": "1.5G",
+        "Word error rate/Speed": "5.74 (our audiobooks) 13.35 (open_stt audiobooks) 20.73 (open_stt youtube) 37.38 (openstt calls) 8.65 (golos crowd) 19.71 (sova devices)",
+        "Notes": "Big mixed band Russian model for servers",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "vosk-model-ru-0.10",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-ru-0.10.zip",
+        "Size": "2.5G",
+        "Word error rate/Speed": "5.71 (our audiobooks) 16.26 (open_stt audiobooks) 26.20 (public_youtube_700_val open_stt) 40.15 (asr_calls_2_val open_stt)",
+        "Notes": "Big narrowband Russian model for servers",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "French",
+        "URL": "",
+        "Size": "",
+        "Word error rate/Speed": "",
+        "Notes": "",
+        "License": ""
+    },
+    {
+        "Model": "vosk-model-small-fr-0.22",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-small-fr-0.22.zip",
+        "Size": "41M",
+        "Word error rate/Speed": "23.95 (cv test) 19.30 (mtedx) 27.25 (podcast)",
+        "Notes": "Lightweight wideband model for Android/iOS and RPi",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "vosk-model-fr-0.22",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-fr-0.22.zip",
+        "Size": "1.4G",
+        "Word error rate/Speed": "14.72 (cv test) 11.64 (mls) 13.10 (mtedx) 21.61 (podcast) 13.22 (voxpopuli)",
+        "Notes": "Big accurate model for servers",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "French Other",
+        "URL": "",
+        "Size": "",
+        "Word error rate/Speed": "",
+        "Notes": "",
+        "License": ""
+    },
+    {
+        "Model": "vosk-model-small-fr-pguyot-0.3",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-small-fr-pguyot-0.3.zip",
+        "Size": "39M",
+        "Word error rate/Speed": "37.04 (cv test) 28.72 (mtedx) 37.46 (podcast)",
+        "Notes": "Lightweight wideband model for Android and RPi trained by Paul Guyot",
+        "License": "CC-BY-NC-SA 4.0"
+    },
+    {
+        "Model": "vosk-model-fr-0.6-linto-2.2.0",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-fr-0.6-linto-2.2.0.zip",
+        "Size": "1.5G",
+        "Word error rate/Speed": "16.19 (cv test) 16.44 (mtedx) 23.77 (podcast) 0.4xRT",
+        "Notes": "Model from LINTO project",
+        "License": "AGPL"
+    },
+    {
+        "Model": "German",
+        "URL": "",
+        "Size": "",
+        "Word error rate/Speed": "",
+        "Notes": "",
+        "License": ""
+    },
+    {
+        "Model": "vosk-model-de-0.21",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-de-0.21.zip",
+        "Size": "1.9G",
+        "Word error rate/Speed": "9.83 (Tuda-de test), 24.00 (podcast) 12.82 (cv-test) 12.42 (mls) 33.26 (mtedx)",
+        "Notes": "Big German model for telephony and server",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "vosk-model-de-tuda-0.6-900k",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-de-tuda-0.6-900k.zip",
+        "Size": "4.4G",
+        "Word error rate/Speed": "9.48 (Tuda-de test), 25.82 (podcast) 4.97 (cv-test) 11.01 (mls) 35.20 (mtedx)",
+        "Notes": "Latest big wideband model from Tuda-DE project",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "vosk-model-small-de-zamia-0.3",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-small-de-zamia-0.3.zip",
+        "Size": "49M",
+        "Word error rate/Speed": "14.81 (Tuda-de test, 37.46 (podcast)",
+        "Notes": "Zamia f_250 small model repackaged (not recommended)",
+        "License": "LGPL-3.0"
+    },
+    {
+        "Model": "vosk-model-small-de-0.15",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-small-de-0.15.zip",
+        "Size": "45M",
+        "Word error rate/Speed": "13.75 (Tuda-de test), 30.67 (podcast)",
+        "Notes": "Lightweight wideband model for Android and RPi",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "Spanish",
+        "URL": "",
+        "Size": "",
+        "Word error rate/Speed": "",
+        "Notes": "",
+        "License": ""
+    },
+    {
+        "Model": "vosk-model-small-es-0.42",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-small-es-0.42.zip",
+        "Size": "39M",
+        "Word error rate/Speed": "16.02 (cv test) 16.72 (mtedx test) 11.21 (mls)",
+        "Notes": "Lightweight wideband model for Android and RPi",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "vosk-model-es-0.42",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-es-0.42.zip",
+        "Size": "1.4G",
+        "Word error rate/Speed": "7.50 (cv test) 10.05 (mtedx test) 5.84 (mls)",
+        "Notes": "Big model for Spanish",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "Portuguese/Brazilian Portuguese",
+        "URL": "",
+        "Size": "",
+        "Word error rate/Speed": "",
+        "Notes": "",
+        "License": ""
+    },
+    {
+        "Model": "vosk-model-small-pt-0.3",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-small-pt-0.3.zip",
+        "Size": "31M",
+        "Word error rate/Speed": "68.92 (coraa dev) 32.60 (cv test)",
+        "Notes": "Lightweight wideband model for Android and RPi",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "vosk-model-pt-fb-v0.1.1-20220516_2113",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-pt-fb-v0.1.1-20220516_2113.zip",
+        "Size": "1.6G",
+        "Word error rate/Speed": "54.34 (coraa dev) 27.70 (cv test)",
+        "Notes": "Big model from FalaBrazil",
+        "License": "GPLv3.0"
+    },
+    {
+        "Model": "Greek",
+        "URL": "",
+        "Size": "",
+        "Word error rate/Speed": "",
+        "Notes": "",
+        "License": ""
+    },
+    {
+        "Model": "vosk-model-el-gr-0.7",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-el-gr-0.7.zip",
+        "Size": "1.1G",
+        "Word error rate/Speed": "TBD",
+        "Notes": "Big narrowband Greek model for server processing, not extremely accurate though",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "Turkish",
+        "URL": "",
+        "Size": "",
+        "Word error rate/Speed": "",
+        "Notes": "",
+        "License": ""
+    },
+    {
+        "Model": "vosk-model-small-tr-0.3",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-small-tr-0.3.zip",
+        "Size": "35M",
+        "Word error rate/Speed": "TBD",
+        "Notes": "Lightweight wideband model for Android and RPi",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "Vietnamese",
+        "URL": "",
+        "Size": "",
+        "Word error rate/Speed": "",
+        "Notes": "",
+        "License": ""
+    },
+    {
+        "Model": "vosk-model-small-vn-0.4",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-small-vn-0.4.zip",
+        "Size": "32M",
+        "Word error rate/Speed": "15.70 (Vivos test)",
+        "Notes": "Lightweight Vietnamese model",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "vosk-model-vn-0.4",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-vn-0.4.zip",
+        "Size": "78M",
+        "Word error rate/Speed": "15.70 (Vivos test)",
+        "Notes": "Bigger Vietnamese model for server",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "Italian",
+        "URL": "",
+        "Size": "",
+        "Word error rate/Speed": "",
+        "Notes": "",
+        "License": ""
+    },
+    {
+        "Model": "vosk-model-small-it-0.22",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-small-it-0.22.zip",
+        "Size": "48M",
+        "Word error rate/Speed": "16.88 (cv test) 25.87 (mls) 17.01 (mtedx)",
+        "Notes": "Lightweight model for Android and RPi",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "vosk-model-it-0.22",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-it-0.22.zip",
+        "Size": "1.2G",
+        "Word error rate/Speed": "8.10 (cv test) 15.68 (mls) 11.23 (mtedx)",
+        "Notes": "Big generic Italian model for servers",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "Dutch",
+        "URL": "",
+        "Size": "",
+        "Word error rate/Speed": "",
+        "Notes": "",
+        "License": ""
+    },
+    {
+        "Model": "vosk-model-small-nl-0.22",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-small-nl-0.22.zip",
+        "Size": "39M",
+        "Word error rate/Speed": "22.45 (cv test) 26.80 (tv) 25.84 (mls) 24.09 (voxpopuli)",
+        "Notes": "Lightweight model for Dutch",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "Dutch Other",
+        "URL": "",
+        "Size": "",
+        "Word error rate/Speed": "",
+        "Notes": "",
+        "License": ""
+    },
+    {
+        "Model": "vosk-model-nl-spraakherkenning-0.6",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-nl-spraakherkenning-0.6.zip",
+        "Size": "860M",
+        "Word error rate/Speed": "20.40 (cv test) 32.64 (tv) 17.73 (mls) 19.96 (voxpopuli)",
+        "Notes": "Medium Dutch model from Kaldi_NL",
+        "License": "CC-BY-NC-SA"
+    },
+    {
+        "Model": "vosk-model-nl-spraakherkenning-0.6-lgraph",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-nl-spraakherkenning-0.6-lgraph.zip",
+        "Size": "100M",
+        "Word error rate/Speed": "22.82 (cv test) 34.01 (tv) 18.81 (mls) 21.01 (voxpopuli)",
+        "Notes": "Smaller model with dynamic graph",
+        "License": "CC-BY-NC-SA"
+    },
+    {
+        "Model": "Catalan",
+        "URL": "",
+        "Size": "",
+        "Word error rate/Speed": "",
+        "Notes": "",
+        "License": ""
+    },
+    {
+        "Model": "vosk-model-small-ca-0.4",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-small-ca-0.4.zip",
+        "Size": "42M",
+        "Word error rate/Speed": "TBD",
+        "Notes": "Lightweight wideband model for Android and RPi for Catalan",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "Arabic",
+        "URL": "",
+        "Size": "",
+        "Word error rate/Speed": "",
+        "Notes": "",
+        "License": ""
+    },
+    {
+        "Model": "vosk-model-ar-mgb2-0.4",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-ar-mgb2-0.4.zip",
+        "Size": "318M",
+        "Word error rate/Speed": "16.40 (MGB-2 dev set)",
+        "Notes": "Repackaged Arabic model trained on MGB2 dataset from Kaldi",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "vosk-model-ar-0.22-linto-1.1.0",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-ar-0.22-linto-1.1.0.zip",
+        "Size": "1.3G",
+        "Word error rate/Speed": "52.87 (cv test) 28.50 (MBG-2 dev set) 1.0xRT",
+        "Notes": "Big model from LINTO project",
+        "License": "AGPL"
+    },
+    {
+        "Model": "Farsi",
+        "URL": "",
+        "Size": "",
+        "Word error rate/Speed": "",
+        "Notes": "",
+        "License": ""
+    },
+    {
+        "Model": "vosk-model-small-fa-0.4",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-small-fa-0.4.zip",
+        "Size": "47M",
+        "Word error rate/Speed": "TBD",
+        "Notes": "Lightweight wideband model for Android and RPi for Farsi (Persian)",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "vosk-model-fa-0.5",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-fa-0.5.zip",
+        "Size": "1G",
+        "Word error rate/Speed": "TBD",
+        "Notes": "Model with large vocabulary, not yet accurate but better than before (Persian)",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "vosk-model-small-fa-0.5",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-small-fa-0.5.zip",
+        "Size": "60M",
+        "Word error rate/Speed": "TBD",
+        "Notes": "Bigger small model for desktop application (Persian)",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "Filipino",
+        "URL": "",
+        "Size": "",
+        "Word error rate/Speed": "",
+        "Notes": "",
+        "License": ""
+    },
+    {
+        "Model": "vosk-model-tl-ph-generic-0.6",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-tl-ph-generic-0.6.zip",
+        "Size": "320M",
+        "Word error rate/Speed": "TBD",
+        "Notes": "Medium wideband model for Filipino (Tagalog) by feddybear",
+        "License": "CC-BY-NC-SA 4.0"
+    },
+    {
+        "Model": "Ukrainian",
+        "URL": "",
+        "Size": "",
+        "Word error rate/Speed": "",
+        "Notes": "",
+        "License": ""
+    },
+    {
+        "Model": "vosk-model-small-uk-v3-nano",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-small-uk-v3-nano.zip",
+        "Size": "73M",
+        "Word error rate/Speed": "TBD",
+        "Notes": "Nano model from Speech Recognition for Ukrainian",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "vosk-model-small-uk-v3-small",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-small-uk-v3-small.zip",
+        "Size": "133M",
+        "Word error rate/Speed": "TBD",
+        "Notes": "Small model from Speech Recognition for Ukrainian",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "vosk-model-uk-v3",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-uk-v3.zip",
+        "Size": "343M",
+        "Word error rate/Speed": "TBD",
+        "Notes": "Bigger model from Speech Recognition for Ukrainian",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "vosk-model-uk-v3-lgraph",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-uk-v3-lgraph.zip",
+        "Size": "325M",
+        "Word error rate/Speed": "TBD",
+        "Notes": "Big dynamic model from Speech Recognition for Ukrainian",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "Kazakh",
+        "URL": "",
+        "Size": "",
+        "Word error rate/Speed": "",
+        "Notes": "",
+        "License": ""
+    },
+    {
+        "Model": "vosk-model-small-kz-0.15",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-small-kz-0.15.zip",
+        "Size": "42M",
+        "Word error rate/Speed": "9.60(dev) 8.32(test)",
+        "Notes": "Small mobile model from SAIDA_Kazakh",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "vosk-model-kz-0.15",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-kz-0.15.zip",
+        "Size": "378M",
+        "Word error rate/Speed": "8.06(dev) 6.81(test)",
+        "Notes": "Bigger wideband model SAIDA_Kazakh",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "Swedish",
+        "URL": "",
+        "Size": "",
+        "Word error rate/Speed": "",
+        "Notes": "",
+        "License": ""
+    },
+    {
+        "Model": "vosk-model-small-sv-rhasspy-0.15",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-small-sv-rhasspy-0.15.zip",
+        "Size": "289M",
+        "Word error rate/Speed": "TBD",
+        "Notes": "Repackaged model from Rhasspy project",
+        "License": "MIT"
+    },
+    {
+        "Model": "Japanese",
+        "URL": "",
+        "Size": "",
+        "Word error rate/Speed": "",
+        "Notes": "",
+        "License": ""
+    },
+    {
+        "Model": "vosk-model-small-ja-0.22",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-small-ja-0.22.zip",
+        "Size": "48M",
+        "Word error rate/Speed": "9.52(csj CER) 17.07(ted10k CER)",
+        "Notes": "Lightweight wideband model for Japanese",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "vosk-model-ja-0.22",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-ja-0.22.zip",
+        "Size": "1Gb",
+        "Word error rate/Speed": "8.40(csj CER) 13.91(ted10k CER)",
+        "Notes": "Big model for Japanese",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "Esperanto",
+        "URL": "",
+        "Size": "",
+        "Word error rate/Speed": "",
+        "Notes": "",
+        "License": ""
+    },
+    {
+        "Model": "vosk-model-small-eo-0.42",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-small-eo-0.42.zip",
+        "Size": "42M",
+        "Word error rate/Speed": "7.24 (CV Test)",
+        "Notes": "Lightweight model for Esperanto",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "Hindi",
+        "URL": "",
+        "Size": "",
+        "Word error rate/Speed": "",
+        "Notes": "",
+        "License": ""
+    },
+    {
+        "Model": "vosk-model-small-hi-0.22",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-small-hi-0.22.zip",
+        "Size": "42M",
+        "Word error rate/Speed": "20.89 (IITM Challenge) 24.72 (MUCS Challenge)",
+        "Notes": "Lightweight model for Hindi",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "vosk-model-hi-0.22",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-hi-0.22.zip",
+        "Size": "1.5Gb",
+        "Word error rate/Speed": "14.85 (CV Test) 14.83 (IITM Challenge) 13.11 (MUCS Challenge)",
+        "Notes": "Big accurate model for servers",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "Czech",
+        "URL": "",
+        "Size": "",
+        "Word error rate/Speed": "",
+        "Notes": "",
+        "License": ""
+    },
+    {
+        "Model": "vosk-model-small-cs-0.4-rhasspy",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-small-cs-0.4-rhasspy.zip",
+        "Size": "44M",
+        "Word error rate/Speed": "21.29 (CV Test)",
+        "Notes": "Lightweight model for Czech from Rhasspy project",
+        "License": "MIT"
+    },
+    {
+        "Model": "Polish",
+        "URL": "",
+        "Size": "",
+        "Word error rate/Speed": "",
+        "Notes": "",
+        "License": ""
+    },
+    {
+        "Model": "vosk-model-small-pl-0.22",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-small-pl-0.22.zip",
+        "Size": "50M",
+        "Word error rate/Speed": "18.36 (CV Test) 16.88 (MLS Test) 11.55 (Voxpopuli Test)",
+        "Notes": "Lightweight model for Polish",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "Uzbek",
+        "URL": "",
+        "Size": "",
+        "Word error rate/Speed": "",
+        "Notes": "",
+        "License": ""
+    },
+    {
+        "Model": "vosk-model-small-uz-0.22",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-small-uz-0.22.zip",
+        "Size": "49M",
+        "Word error rate/Speed": "13.54 (CV Test) 12.92 (IS2AI USC test)",
+        "Notes": "Lightweight model for Uzbek",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "Korean",
+        "URL": "",
+        "Size": "",
+        "Word error rate/Speed": "",
+        "Notes": "",
+        "License": ""
+    },
+    {
+        "Model": "vosk-model-small-ko-0.22",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-small-ko-0.22.zip",
+        "Size": "82M",
+        "Word error rate/Speed": "28.1 (Zeroth Test)",
+        "Notes": "Lightweight model for Korean",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "Breton",
+        "URL": "",
+        "Size": "",
+        "Word error rate/Speed": "",
+        "Notes": "",
+        "License": ""
+    },
+    {
+        "Model": "vosk-model-br-0.8",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-br-0.8.zip",
+        "Size": "70M",
+        "Word error rate/Speed": "36.4 (MCV11 Test)",
+        "Notes": "Breton model from vosk-br project",
+        "License": "MIT license"
+    },
+    {
+        "Model": "Gujarati",
+        "URL": "",
+        "Size": "",
+        "Word error rate/Speed": "",
+        "Notes": "",
+        "License": ""
+    },
+    {
+        "Model": "vosk-model-gu-0.42",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-gu-0.42.zip",
+        "Size": "700M",
+        "Word error rate/Speed": "16.45 (MS Test)",
+        "Notes": "Big Gujarati model",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "vosk-model-small-gu-0.42",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-small-gu-0.42.zip",
+        "Size": "100M",
+        "Word error rate/Speed": "20.49 (MS Test)",
+        "Notes": "Lightweight model for Gujarati",
+        "License": "Apache 2.0"
+    },
+    {
+        "Model": "Speaker identification model",
+        "URL": "",
+        "Size": "",
+        "Word error rate/Speed": "",
+        "Notes": "",
+        "License": ""
+    },
+    {
+        "Model": "vosk-model-spk-0.4",
+        "URL": "https://alphacephei.com/vosk/models/vosk-model-spk-0.4.zip",
+        "Size": "13M",
+        "Word error rate/Speed": "TBD",
+        "Notes": "Model for speaker identification, should work for all languages",
+        "License": "Apache 2.0"
+    }
+]
