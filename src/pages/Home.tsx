@@ -1,4 +1,4 @@
-import ModelDownload from "../components/ModelDownload.tsx";
+import ModelsTable from "../components/ModelsTable.tsx";
 
 export default function Home() {
   return (
@@ -11,7 +11,7 @@ export default function Home() {
       </div>
 
       <div>
-        <ModelDownload />
+        <ModelsTable />
       </div>
 
     </div>

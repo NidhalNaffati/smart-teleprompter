@@ -7,6 +7,7 @@ interface ModelItem {
   Notes: string;
   License: string;
   URL: string;
+  Downloaded: boolean;
 }
 
 const TableComponent = () => {
@@ -18,7 +19,7 @@ const TableComponent = () => {
 
   // Function to determine if download button should be rendered
   const areWeRenderingTheModelLanguage = (item: ModelItem): boolean => {
-    return item.Size === "" && item['Word error rate/Speed'] === "" && item.Notes === "" && item.License === "";
+    return item.Size === "" && item['Word error rate/Speed'] === "" && item.Notes === "" && item.License === "" && !item.Downloaded;
   };
 
   return (
@@ -50,9 +51,10 @@ const TableComponent = () => {
               :
               (
                 <td className="border px-4 py-2">
-                  <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                          onClick={() => handleDownload(item.URL)}>
-                    Download
+                  <button
+                    className={`text-white font-bold py-2 px-4 rounded ${item.Downloaded ? 'bg-gray-500 hover:bg-gray-700 cursor-not-allowed disabled: ' : 'bg-blue-500 hover:bg-blue-700'}`}
+                    onClick={() => handleDownload(item.URL)}>
+                    {item.Downloaded ? 'downloaded' : 'download'}
                   </button>
                 </td>
               )
