@@ -2,8 +2,9 @@ import path from "node:path";
 import {app, BrowserWindow} from "electron";
 import fs from "fs";
 import https from "https";
+import AdmZip from "adm-zip";
 
-export function downloadFile(url: string) {
+export function downloadFile(url: string, name: string) {
   const window = BrowserWindow.getFocusedWindow(); // Get the reference to the focused window
 
   const fileName = path.basename(url); // Extracting the file name from the provided URL
@@ -42,6 +43,7 @@ export function downloadFile(url: string) {
             window.webContents.send('download-complete', "Download Complete from the main process"); // Sending a message to the renderer process indicating download completion
           }
           extractFiles(downloadPath, downloadDir); // Extracting the downloaded zip file (assuming it's a zip file
+          updateModelDownloadedStatus(name); // Updating the downloaded status of the model in the models list
         });
 
       } else {
@@ -60,9 +62,6 @@ export function downloadFile(url: string) {
   }
 }
 
-// extract files from the downloaded zip
-import AdmZip from "adm-zip";
-
 function extractFiles(zipPath: string, extractDir: string) {
   try {
     const zip = new AdmZip(zipPath); // Creating a new instance of AdmZip with the downloaded zip file
@@ -74,4 +73,53 @@ function extractFiles(zipPath: string, extractDir: string) {
     fs.unlinkSync(zipPath); // Deleting the downloaded zip file after extraction
     console.log(`Deleted zip file: ${zipPath}`); // Logging the deletion of the zip file
   }
+}
+
+interface ModelData {
+  Model: string;
+  URL: string;
+  Size: string;
+  'Word error rate/Speed': string;
+  Notes: string;
+  License: string;
+  Downloaded: boolean;
+}
+
+function markModelAsDownloaded(models: ModelData[], modelName: string): ModelData[] {
+  return models.map(model => {
+    if (model.Model === modelName) {
+      return {
+        ...model,
+        Downloaded: true
+      };
+    }
+    return model;
+  });
+}
+
+function updateModelDownloadedStatus(modelName: string): void {
+  const modelList = path.join(app.getAppPath(), 'src', 'data', 'models-list.json');
+
+  fs.readFile(modelList, 'utf8', (err, data) => {
+    if (err) {
+      console.error('Error reading file:', err);
+      return;
+    }
+
+    try {
+      const models: ModelData[] = JSON.parse(data);
+      const updatedModels = markModelAsDownloaded(models, modelName);
+      const updatedData = JSON.stringify(updatedModels, null, 4);
+
+      fs.writeFile(modelList, updatedData, 'utf8', err => {
+        if (err) {
+          console.error('Error writing to file:', err);
+          return;
+        }
+        console.log(`Model ${modelName} marked as downloaded.`);
+      });
+    } catch (err) {
+      console.error('Error parsing JSON:', err);
+    }
+  });
 }

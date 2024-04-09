@@ -1,4 +1,5 @@
 import data from '../data/models-list.json';
+import {IpcRenderer} from "electron";
 
 interface ModelItem {
   Model: string;
@@ -9,11 +10,17 @@ interface ModelItem {
   URL: string;
 }
 
+const ipcRenderer: IpcRenderer = window.ipcRenderer;
+
 const TableComponent = () => {
 
   // Function to handle download
-  const handleDownload = (url: string) => {
-    console.log("Downloading model from:", url);
+  const handleDownload = (modelUrl: string, modelName: string) => {
+    try {
+      ipcRenderer.send('download-file', modelUrl, modelName);
+    } catch (error) {
+      console.error('Error downloading or extracting model:', error);
+    }
   };
 
   // Function to determine if download button should be rendered
@@ -54,7 +61,7 @@ const TableComponent = () => {
                     className={`text-white font-bold py-2 px-4 rounded ${item.Downloaded ? 'bg-gray-500 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-700'}`}
                     onClick={() => {
                       if (!item.Downloaded) {
-                        handleDownload(item.URL);
+                        handleDownload(item.URL, item.Model);
                       }
                     }}
                     disabled={item.Downloaded}>
