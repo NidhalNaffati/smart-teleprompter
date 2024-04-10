@@ -4,7 +4,17 @@ import fs from "fs";
 import https from "https";
 import AdmZip from "adm-zip";
 
-export function downloadFile(url: string, name: string) {
+interface ModelData {
+  Model: string;
+  URL: string;
+  Size: string;
+  'Word error rate/Speed': string;
+  Notes: string;
+  License: string;
+  Downloaded: boolean;
+}
+
+export function downloadModel(url: string, name: string) {
   const window = BrowserWindow.getFocusedWindow(); // Get the reference to the focused window
 
   const fileName = path.basename(url); // Extracting the file name from the provided URL
@@ -43,7 +53,7 @@ export function downloadFile(url: string, name: string) {
             window.webContents.send('download-complete', "Download Complete from the main process"); // Sending a message to the renderer process indicating download completion
           }
           extractFiles(downloadPath, downloadDir); // Extracting the downloaded zip file (assuming it's a zip file
-          updateModelDownloadedStatus(name); // Updating the downloaded status of the model in the models list
+          updateModelDownloadStatus(name, true); // Updating the downloaded status of the model in the models list
         });
 
       } else {
@@ -75,29 +85,36 @@ function extractFiles(zipPath: string, extractDir: string) {
   }
 }
 
-interface ModelData {
-  Model: string;
-  URL: string;
-  Size: string;
-  'Word error rate/Speed': string;
-  Notes: string;
-  License: string;
-  Downloaded: boolean;
+export function deleteModel(modelName: string): void {
+  const modelPath = path.join(app.getAppPath(), 'models', modelName);
+
+  try {
+    if (fs.existsSync(modelPath)) { // Checking if the model directory exists
+      fs.rmSync(modelPath, {recursive: true}); // Deleting the model directory if it exists
+      console.log(`Model ${modelName} deleted successfully.`);
+      updateModelDownloadStatus(modelName, false); // updating the downloaded status
+    } else {
+      console.error(`Model ${modelName} not found.`);
+      updateModelDownloadStatus(modelName, false); // update the downloaded status even if the model is not found
+    }
+  } catch (err) {
+    console.error('Error deleting model:', err);
+  }
 }
 
-function markModelAsDownloaded(models: ModelData[], modelName: string): ModelData[] {
-  return models.map(model => {
-    if (model.Model === modelName) {
+function updateDownloadStatus(models: ModelData[], modelName: string, status: boolean): ModelData[] {
+  return models.map(model => { // Mapping over the models list
+    if (model.Model === modelName) { // Checking if the model name matches the provided model name
       return {
-        ...model,
-        Downloaded: true
+        ...model, // Keeping the existing model data
+        Downloaded: status // Updating the downloaded status of the model
       };
     }
     return model;
   });
 }
 
-function updateModelDownloadedStatus(modelName: string): void {
+function updateModelDownloadStatus(modelName: string, status: boolean): void {
   const modelList = path.join(app.getAppPath(), 'src', 'data', 'models-list.json');
 
   fs.readFile(modelList, 'utf8', (err, data) => {
@@ -108,7 +125,7 @@ function updateModelDownloadedStatus(modelName: string): void {
 
     try {
       const models: ModelData[] = JSON.parse(data);
-      const updatedModels = markModelAsDownloaded(models, modelName);
+      const updatedModels = updateDownloadStatus(models, modelName, status);
       const updatedData = JSON.stringify(updatedModels, null, 4);
 
       fs.writeFile(modelList, updatedData, 'utf8', err => {
@@ -116,7 +133,6 @@ function updateModelDownloadedStatus(modelName: string): void {
           console.error('Error writing to file:', err);
           return;
         }
-        console.log(`Model ${modelName} marked as downloaded.`);
       });
     } catch (err) {
       console.error('Error parsing JSON:', err);

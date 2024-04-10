@@ -8,18 +8,26 @@ interface ModelItem {
   Notes: string;
   License: string;
   URL: string;
+  Downloaded: boolean;
 }
 
 const ipcRenderer: IpcRenderer = window.ipcRenderer;
 
 const TableComponent = () => {
 
-  // Function to handle download
   const handleDownload = (modelUrl: string, modelName: string) => {
     try {
-      ipcRenderer.send('download-file', modelUrl, modelName);
+      ipcRenderer.send('download-model', modelUrl, modelName);
     } catch (error) {
       console.error('Error downloading or extracting model:', error);
+    }
+  };
+
+  const handleDelete = (modelName: string) => {
+    try {
+      ipcRenderer.send('delete-model', modelName);
+    } catch (error) {
+      console.error('Error deleting model:', error);
     }
   };
 
@@ -57,16 +65,19 @@ const TableComponent = () => {
               :
               (
                 <td className="border px-4 py-2">
-                  <button
-                    className={`text-white font-bold py-2 px-4 rounded ${item.Downloaded ? 'bg-gray-500 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-700'}`}
-                    onClick={() => {
-                      if (!item.Downloaded) {
-                        handleDownload(item.URL, item.Model);
-                      }
-                    }}
-                    disabled={item.Downloaded}>
-                    {item.Downloaded ? 'Downloaded' : 'Download'}
-                  </button>
+                  {item.Downloaded ?
+                    <button
+                      className="text-white font-bold py-2 px-4 rounded bg-red-500 hover:bg-red-700"
+                      onClick={() => handleDelete(item.Model)}>
+                      Delete
+                    </button>
+                    :
+                    <button
+                      className="text-white font-bold py-2 px-4 rounded bg-blue-500 hover:bg-blue-700"
+                      onClick={() => handleDownload(item.URL, item.Model)}>
+                      Download
+                    </button>
+                  }
                 </td>
               )
             }
