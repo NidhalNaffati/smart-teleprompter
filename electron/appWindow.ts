@@ -2,6 +2,7 @@ import {app, BrowserWindow} from "electron";
 import path from "node:path";
 import {registerVoskIPC} from "./ipc/vosk.ts";
 import {registerModelDownloadIPC} from "./ipc/model-handler.ts";
+import {writeAppSettings} from "./app-settings.ts";
 
 process.env.DIST = path.join(__dirname, "../dist");
 process.env.VITE_PUBLIC = app.isPackaged
@@ -34,6 +35,9 @@ export function createWindow(): BrowserWindow {
   } else {
     window.loadFile(path.join(process.env.DIST, "index.html"));
   }
+
+  // set the default settings if they don't exist
+  writeAppSettings();
 
   // initialize IPC handlers for Vosk
   registerVoskIPC(window);
