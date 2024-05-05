@@ -1,5 +1,3 @@
-import ModelsTable from "../components/ModelsTable.tsx";
-
 export default function Home() {
   return (
     <div>
@@ -9,11 +7,6 @@ export default function Home() {
           <p className="text-slate-500">You have a new message!</p>
         </div>
       </div>
-
-      <div>
-        <ModelsTable />
-      </div>
-
     </div>
   );
 }
