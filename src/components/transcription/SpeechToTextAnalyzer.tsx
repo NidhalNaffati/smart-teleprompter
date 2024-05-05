@@ -1,6 +1,6 @@
 import ScriptComparison from "./ScriptComparison.tsx";
 import Navigation from "./Navigation.tsx";
-import useTextAnalyzerHooks from "../hooks/useTextAnalyzerHooks.ts";
+import useTextAnalyzerHooks from "../../hooks/useTextAnalyzerHooks.ts";
 import {ChangeEvent, useState} from "react";
 import VoskControl from "./VoskControl.tsx";
 

@@ -1,5 +1,5 @@
-import VoskControl from "../components/VoskControl.tsx";
-import SpeechToTextAnalyzer from "../components/SpeechToTextAnalyzer.tsx";
+import VoskControl from "../components/transcription/VoskControl.tsx";
+import SpeechToTextAnalyzer from "../components/transcription/SpeechToTextAnalyzer.tsx";
 
 export default function Transcription() {
   return (

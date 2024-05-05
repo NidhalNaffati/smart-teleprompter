@@ -1,5 +1,5 @@
 import React from "react";
-import {isWordSimilar} from "../utils/word-similarity.ts";
+import {isWordSimilar} from "../../utils/word-similarity.ts";
 
 interface ComparisonProps {
   currentParagraphIndex: number;
