@@ -9,6 +9,7 @@ lerna-debug.log*
 
 # the model that contains the trained model from downloaded from: https://alphacephei.com/vosk/models
 model
+models
 node_modules
 dist
 dist-ssr
