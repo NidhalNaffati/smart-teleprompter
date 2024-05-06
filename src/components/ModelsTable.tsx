@@ -1,16 +1,7 @@
 import {useState, useEffect} from 'react';
 import data from '../data/models-list.json';
 import {IpcRenderer} from "electron";
-
-interface ModelItem {
-  Model: string;
-  Size: string;
-  'Word error rate/Speed': string;
-  Notes: string;
-  License: string;
-  URL: string;
-  Downloaded: boolean;
-}
+import {ModelItem} from "../types/ModelItem.ts";
 
 const ipcRenderer: IpcRenderer = window.ipcRenderer;
 

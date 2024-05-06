@@ -3,16 +3,7 @@ import {app, BrowserWindow} from "electron";
 import fs from "fs";
 import https from "https";
 import AdmZip from "adm-zip";
-
-interface ModelData {
-  Model: string;
-  URL: string;
-  Size: string;
-  'Word error rate/Speed': string;
-  Notes: string;
-  License: string;
-  Downloaded: boolean;
-}
+import {ModelItem} from "../../src/types/ModelItem.ts";
 
 export function downloadModel(url: string, name: string) {
   const window = BrowserWindow.getFocusedWindow(); // Get the reference to the focused window
@@ -116,7 +107,7 @@ export function deleteModel(modelName: string): void {
   }
 }
 
-function updateDownloadStatus(models: ModelData[], modelName: string, status: boolean): ModelData[] {
+function updateDownloadStatus(models: ModelItem[], modelName: string, status: boolean): ModelItem[] {
   return models.map(model => { // Mapping over the models list
     if (model.Model === modelName) { // Checking if the model name matches the provided model name
       return {
@@ -138,7 +129,7 @@ function updateModelDownloadStatus(modelName: string, status: boolean): void {
     }
 
     try {
-      const models: ModelData[] = JSON.parse(data);
+      const models: ModelItem[] = JSON.parse(data);
       const updatedModels = updateDownloadStatus(models, modelName, status);
       const updatedData = JSON.stringify(updatedModels, null, 4);
 
