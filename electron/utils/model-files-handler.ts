@@ -44,14 +44,15 @@ export function downloadModel(url: string, name: string) {
           const progress = totalBytes ? (downloadedBytes / totalBytes) * 100 : 0; // Calculating the download progress percentage
           console.log(`Downloaded ${progress.toFixed(2)}%`); // Logging the download progress
           file.write(chunk); // Writing the received data chunk to the file
+
+          // Sending download progress to the renderer process
+          window?.webContents.send('download-progress', progress.toFixed(2));
         });
 
         response.on("end", () => { // Handling end of response
           file.end(); // Closing the file stream
           console.log(`Download complete: ${downloadPath}`); // Logging download completion
-          if (window) {
-            window.webContents.send('download-complete', "Download Complete from the main process"); // Sending a message to the renderer process indicating download completion
-          }
+          window?.webContents.send('download-complete', "Download Complete from the main process"); // Sending a message to the renderer process indicating download completion
           extractFiles(downloadPath, downloadDir); // Extracting the downloaded zip file (assuming it's a zip file
           updateModelDownloadStatus(name, true); // Updating the downloaded status of the model in the models list
         });
@@ -59,25 +60,38 @@ export function downloadModel(url: string, name: string) {
       } else {
         file.close(); // Closing the file stream
         fs.unlinkSync(downloadPath); // Deleting the incomplete file
+        window?.webContents.send('download-error', 'Error During the download progress'); // Sending the error message to the renderer process
         console.error(`Error downloading file: Status Code ${response.statusCode}`); // Logging the error due to unsuccessful response status code
       }
     });
 
     request.on("error", err => { // Handling request error
-      fs.unlinkSync(downloadPath); // Deleting the file if there's an error during download
-      console.error(`Error downloading file: ${err.message}`); // Logging the error message
+      // get teh error message type
+      if (err.message === 'getaddrinfo EAI_AGAIN alphacephei.com') {
+        window?.webContents.send('download-error', 'Make sure that you are connected to the internet'); // Sending the error message to the renderer process
+        console.error(`Error downloading file: ${err.message}`); // Logging the error message
+      } else {
+        fs.unlinkSync(downloadPath); // Deleting the file if there's an error during download
+        window?.webContents.send('download-error', 'Error During the download progress'); // Sending the error message to the renderer process
+        console.error(`Error downloading file: ${err.message}`); // Logging the error message
+      }
     });
   } catch (error) {
+    window?.webContents.send('download-error', 'Error During the download progress'); // Sending the error message to the renderer process
     console.error(`Error downloading file: ${error}`); // Catching and logging any error occurred during the download process
   }
 }
 
 function extractFiles(zipPath: string, extractDir: string) {
+  const window = BrowserWindow.getFocusedWindow(); // Get the reference to the focused window
+
   try {
     const zip = new AdmZip(zipPath); // Creating a new instance of AdmZip with the downloaded zip file
     zip.extractAllTo(extractDir, true); // Extracting the contents of the zip file to the provided directory
+    window?.webContents.send('download-complete', "Download Complete from the main process"); // Sending a message to the renderer process indicating download completion
     console.log(`Extracted files to: ${extractDir}`); // Logging the extraction completion
   } catch (error) {
+    window?.webContents.send('download-error', 'Error During the Extraction'); // Sending the error message to the renderer process
     console.error(`Error extracting files: ${error}`); // Catching and logging any error occurred during the extraction process
   } finally {
     fs.unlinkSync(zipPath); // Deleting the downloaded zip file after extraction

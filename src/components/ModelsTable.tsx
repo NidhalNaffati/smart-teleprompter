@@ -1,3 +1,4 @@
+import {useState, useEffect} from 'react';
 import data from '../data/models-list.json';
 import {IpcRenderer} from "electron";
 
@@ -14,6 +15,37 @@ interface ModelItem {
 const ipcRenderer: IpcRenderer = window.ipcRenderer;
 
 const TableComponent = () => {
+  const [, setDownloadProgress] = useState<number>(0);
+  const [downloadStatus, setDownloadStatus] = useState<string>('');
+
+  useEffect(() => {
+    ipcRenderer.on('download-progress', (_event, progress: number) => {
+      setDownloadProgress(prevProgress => {
+        console.log('Download progress:', prevProgress); // Log the previous progress
+        // TODO: Notify the user about the download progress via Notification
+        return progress; // Return the updated progress
+      });
+    });
+
+    ipcRenderer.on('download-complete', (_event, downloadPath) => {
+      console.log('Download complete:', downloadPath);
+      alert('Download complete') // TODO: Notify the user about the download completion via Notification
+      setDownloadStatus(`Download complete: ${downloadPath}`);
+    });
+
+    ipcRenderer.on('download-error', (_event, errorMessage) => {
+      setDownloadStatus(`${errorMessage}`);
+      console.log(downloadStatus);
+      alert(`${errorMessage}`) // TODO: Notify the user about the download error via Notification
+    });
+
+    return () => {
+      ipcRenderer.removeAllListeners('download-progress');
+      ipcRenderer.removeAllListeners('download-complete');
+      ipcRenderer.removeAllListeners('download-error');
+
+    };
+  }, [downloadStatus]);
 
   const handleDownload = (modelUrl: string, modelName: string) => {
     try {
