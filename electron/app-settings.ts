@@ -75,7 +75,7 @@ function loadSettings() {
   }
 }
 
-function getParameter(parameter: string) {
+export function getParameter(parameter: string) {
   const settings = loadSettings();
   // read the parameter from the settings
   return settings[parameter];

@@ -1,28 +1,15 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires,no-undef
 const vosk = require("vosk");
+// eslint-disable-next-line @typescript-eslint/no-var-requires,no-undef
 const mic = require("mic");
-const fs = require("fs");
+// eslint-disable-next-line @typescript-eslint/no-var-requires,no-undef
 const process = require("node:process");
 
-// Define the path to the model
-const MODEL_PATH = "model";
 // Define the sample rate of the microphone
 const SAMPLE_RATE = 16000;
 
-function checkModelExists() {
-  if (!fs.existsSync(MODEL_PATH)) { // Check if the model exists
-    console.error(
-      `Please download the model from https://alphacephei.com/vosk/models and unpack as "${MODEL_PATH}" in the current folder.`
-    );
-    // Send model exists message to the main process via IPC
-    process.send({modelExists: false});
-    // Send error message to the main process via IPC
-    process.send({error: `Model does not exist in path "${MODEL_PATH}"`});
-    process.exit(1);
-  }
-
-  // Send model exists message to the main process via IPC
-  process.send({modelExists: true});
-}
+// Retrieve modelPath from command-line arguments
+const MODEL_PATH = process.argv[2]; // Assuming MODEL_PATH is the first argument
 
 function stopVosk(voskObjects) {
   voskObjects.micInstance.stop();
@@ -32,8 +19,6 @@ function stopVosk(voskObjects) {
 
 // Main functions
 function startVosk() {
-
-  checkModelExists();
 
   vosk.setLogLevel(1);
 
@@ -48,9 +33,10 @@ function startVosk() {
     console.error(error);
     // Send model loaded message to the main process via IPC
     process.send({modelLoaded: false});
-    process.send({error: error.message});
+    process.send({error: error});
   }
 
+  // Create a Vosk recognizer
   const rec = new vosk.Recognizer({model, sampleRate: SAMPLE_RATE});
 
   // Create and start a microphone instance
@@ -109,7 +95,7 @@ function startVosk() {
   } catch (error) {
     console.error(error);
     process.send({started: false});
-    process.send({error: error.message});
+    process.send({error: error});
   }
 
 }

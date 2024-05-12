@@ -1,15 +1,24 @@
 import childProcess from "child_process";
 import {BrowserWindow} from "electron";
 import path from "node:path";
+import {getParameter} from "../../app-settings.ts";
 
 function startVoskProcess(win: BrowserWindow) {
   console.log("Starting Vosk process...");
 
+  // Get the current model from the settings
+  const model = getParameter("model");
+  const modelPath = `models/${model}`;
+
   // Spawn the Vosk process with Node inspector enabled
   const voskProcess = childProcess.spawn(
-    "node",
-    ["--inspect", path.join(__dirname, "../electron/utils/vosk-process/transcription.js")],
-    {
+    "node", // Use the Node.js executable
+    [
+      "--inspect", // Enable the Node inspector
+      path.join(__dirname, "../electron/utils/vosk-process/transcription.js"), // Path to the transcription script
+      modelPath // Path to the Vosk model
+    ],
+    { // Pipe the child process' stdout and stderr to the parent process
       stdio: ["pipe", "pipe", process.stdout, "ipc"],
     }
   );
@@ -75,7 +84,6 @@ function startVoskProcess(win: BrowserWindow) {
   return voskProcess;
 }
 
-// Stop the Vosk process
 function stopVoskProcess(voskProcess: childProcess.ChildProcess, win: BrowserWindow) {
   win?.webContents.send("vosk-status", false);
   if (voskProcess) {
