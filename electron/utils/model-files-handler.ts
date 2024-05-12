@@ -107,6 +107,18 @@ export function deleteModel(modelName: string): void {
   }
 }
 
+export function listAvailableModels(): string[] {
+  const modelsDir = path.join(app.getAppPath(), 'models');
+  try {
+    const models = fs.readdirSync(modelsDir); // Reading the contents of the models directory
+    console.log('Available models:', models)
+    return models;
+  } catch (err) {
+    console.error('Error listing models:', err);
+    return [];
+  }
+}
+
 function updateDownloadStatus(models: ModelItem[], modelName: string, status: boolean): ModelItem[] {
   return models.map(model => { // Mapping over the models list
     if (model.Model === modelName) { // Checking if the model name matches the provided model name

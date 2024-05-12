@@ -7,6 +7,18 @@ export default function Settings() {
   const [settings, setSettings] = useState(null);
   const [model, setModel] = useState("");
   const [wordSimilarityPercentage, setWordSimilarityPercentage] = useState(0);
+  const [availableModels, setAvailableModels] = useState<string[]>([]);
+
+  useEffect(() => {
+    // List all the available models
+    ipcRenderer.invoke("list-available-models")
+      .then((result) => {
+        setAvailableModels(result);
+      })
+      .catch((error) => {
+        console.error('Error listing models:', error);
+      });
+  }, []);
 
   useEffect(() => {
     // Get the settings from the main process
@@ -24,7 +36,7 @@ export default function Settings() {
     };
   }, []);
 
-  const handleModelChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleModelChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setModel(event.target.value);
   };
 
@@ -46,11 +58,11 @@ export default function Settings() {
       {settings && (
         <div>
           <label>Model:</label>
-          <input
-            type="text"
-            value={model}
-            onChange={handleModelChange}
-          />
+          <select value={model} onChange={handleModelChange}>
+            {availableModels.map((availableModel) => (
+              <option key={availableModel} value={availableModel}>{availableModel}</option>
+            ))}
+          </select>
           <br/>
           <label>Word Similarity Percentage:</label>
           <input
