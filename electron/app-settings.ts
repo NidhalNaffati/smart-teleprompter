@@ -1,7 +1,6 @@
-import {app, ipcMain} from "electron";
+import {app} from "electron";
 import path from "node:path";
 import * as fs from "fs";
-import IpcMainInvokeEvent = Electron.IpcMainInvokeEvent;
 
 const userDataPath = app.getPath('userData');
 const settingsFilePath = path.join(userDataPath, 'settings.json');
@@ -16,46 +15,7 @@ const defaultSettings: Settings = {
   wordSimilarityPercentage: 80,
 };
 
-// Define IPC channel names
-const IPC_CHANNELS = {
-  GET_SETTINGS: 'get-settings',
-  GET_DEFAULT_SETTINGS: 'get-default-settings',
-  GET_PARAMETER: 'get-parameter',
-  SAVE_SETTINGS: 'save-settings',
-  UPDATE_PARAMETER: 'update-parameter'
-};
-
-
-export function initializeSettingsIPC() {
-
-  // Handler for GET_SETTINGS IPC channel
-  ipcMain.handle(IPC_CHANNELS.GET_SETTINGS, () => {
-    return loadSettings();
-  });
-
-  // Handler for GET_DEFAULT_SETTINGS IPC channel
-  ipcMain.handle(IPC_CHANNELS.GET_DEFAULT_SETTINGS, () => {
-    return getDefaultSettings();
-  });
-
-  // Handler for GET_PARAMETER IPC channel
-  ipcMain.handle(IPC_CHANNELS.GET_PARAMETER, (_even: IpcMainInvokeEvent, parameter) => {
-    return getParameter(parameter);
-  });
-
-  // Handler for UPDATE_PARAMETER IPC channel
-  ipcMain.handle(IPC_CHANNELS.UPDATE_PARAMETER, (_even: IpcMainInvokeEvent, parameter, value) => {
-    updateParameter(parameter, value);
-  });
-
-  // Handler for SAVE_SETTINGS IPC channel
-  ipcMain.handle(IPC_CHANNELS.SAVE_SETTINGS, (_even: IpcMainInvokeEvent, settings) => {
-    saveSettings(settings);
-  });
-
-}
-
-function loadSettings() {
+export function loadSettings() {
   try {
     // If the settings file it doesn't exist, create it with default settings
     if (!fs.existsSync(settingsFilePath)) {
@@ -81,7 +41,7 @@ export function getParameter(parameter: string) {
   return settings[parameter];
 }
 
-function saveSettings(settings: Settings) {
+export function saveSettings(settings: Settings) {
   try {
     console.log("Saving settings ... ", settings);
     fs.writeFileSync(settingsFilePath, JSON.stringify(settings, null, 2));
@@ -90,13 +50,13 @@ function saveSettings(settings: Settings) {
   }
 }
 
-function updateParameter(parameter: string, value: string) {
+export function updateParameter(parameter: string, value: string) {
   const settings = loadSettings();
   settings[parameter] = value;
   saveSettings(settings);
 }
 
-function getDefaultSettings() {
+export function getDefaultSettings() {
   // write the default settings to the file
   saveSettings(defaultSettings);
   return defaultSettings;

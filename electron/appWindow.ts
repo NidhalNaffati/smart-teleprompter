@@ -2,7 +2,7 @@ import {app, BrowserWindow} from "electron";
 import path from "node:path";
 import {registerVoskIPC} from "./ipc/vosk.ts";
 import {registerModelDownloadIPC} from "./ipc/model-handler.ts";
-import {initializeSettingsIPC} from "./app-settings.ts";
+import {initializeSettingsIPC} from "./ipc/settings.ts";
 
 process.env.DIST = path.join(__dirname, "../dist");
 process.env.VITE_PUBLIC = app.isPackaged
