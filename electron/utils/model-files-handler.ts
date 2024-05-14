@@ -5,18 +5,20 @@ import https from "https";
 import AdmZip from "adm-zip";
 import {ModelItem} from "../../src/types/ModelItem.ts";
 
+const MODELS_DIR_PATH = path.join(app.getAppPath(), 'models');
+const MODELS_LIST_PATH = path.join(app.getAppPath(), 'src', 'data', 'models-list.json');
+
 export function downloadModel(url: string, name: string) {
   const window = BrowserWindow.getFocusedWindow(); // Get the reference to the focused window
 
   const fileName = path.basename(url); // Extracting the file name from the provided URL
-  const downloadDir = path.join(app.getAppPath(), "models"); // Generating the directory path where the file will be downloaded
-  const downloadPath = path.join(downloadDir, fileName); // Generating the full path for the downloaded file
+  const downloadPath = path.join(MODELS_DIR_PATH, fileName); // Generating the full path for the downloaded file
 
   try {
     // Check if the directory exists, if not, create it
-    if (!fs.existsSync(downloadDir)) {
-      console.log(`Creating directory: ${downloadDir}`)
-      fs.mkdirSync(downloadDir, {recursive: true}); // Creating the directory recursively if it doesn't exist
+    if (!fs.existsSync(MODELS_DIR_PATH)) {
+      console.log(`Creating directory: ${MODELS_DIR_PATH}`)
+      fs.mkdirSync(MODELS_DIR_PATH, {recursive: true}); // Creating the directory recursively if it doesn't exist
     }
 
     const file = fs.createWriteStream(downloadPath); // Creating a writable stream to write the downloaded data into a file
@@ -44,7 +46,7 @@ export function downloadModel(url: string, name: string) {
           file.end(); // Closing the file stream
           console.log(`Download complete: ${downloadPath}`); // Logging download completion
           window?.webContents.send('download-complete', "Download Complete from the main process"); // Sending a message to the renderer process indicating download completion
-          extractFiles(downloadPath, downloadDir); // Extracting the downloaded zip file (assuming it's a zip file
+          extractFiles(downloadPath, MODELS_DIR_PATH); // Extracting the downloaded zip file (assuming it's a zip file
           updateModelDownloadStatus(name, true); // Updating the downloaded status of the model in the models list
         });
 
@@ -91,11 +93,9 @@ function extractFiles(zipPath: string, extractDir: string) {
 }
 
 export function deleteModel(modelName: string): void {
-  const modelPath = path.join(app.getAppPath(), 'models', modelName);
-
   try {
-    if (fs.existsSync(modelPath)) { // Checking if the model directory exists
-      fs.rmSync(modelPath, {recursive: true}); // Deleting the model directory if it exists
+    if (fs.existsSync(MODELS_DIR_PATH)) { // Checking if the model directory exists
+      fs.rmSync(MODELS_DIR_PATH, {recursive: true}); // Deleting the model directory if it exists
       console.log(`Model ${modelName} deleted successfully.`);
       updateModelDownloadStatus(modelName, false); // updating the downloaded status
     } else {
@@ -108,9 +108,8 @@ export function deleteModel(modelName: string): void {
 }
 
 export function listAvailableModels(): string[] {
-  const modelsDir = path.join(app.getAppPath(), 'models');
   try {
-    const models = fs.readdirSync(modelsDir); // Reading the contents of the models directory
+    const models = fs.readdirSync(MODELS_DIR_PATH); // Reading the contents of the models directory
     console.log('Available models:', models)
     return models;
   } catch (err) {
@@ -132,9 +131,8 @@ function updateDownloadStatus(models: ModelItem[], modelName: string, status: bo
 }
 
 function updateModelDownloadStatus(modelName: string, status: boolean): void {
-  const modelList = path.join(app.getAppPath(), 'src', 'data', 'models-list.json');
 
-  fs.readFile(modelList, 'utf8', (err, data) => {
+  fs.readFile(MODELS_LIST_PATH, 'utf8', (err, data) => {
     if (err) {
       console.error('Error reading file:', err);
       return;
@@ -145,7 +143,7 @@ function updateModelDownloadStatus(modelName: string, status: boolean): void {
       const updatedModels = updateDownloadStatus(models, modelName, status);
       const updatedData = JSON.stringify(updatedModels, null, 4);
 
-      fs.writeFile(modelList, updatedData, 'utf8', err => {
+      fs.writeFile(MODELS_LIST_PATH, updatedData, 'utf8', err => {
         if (err) {
           console.error('Error writing to file:', err);
           return;
