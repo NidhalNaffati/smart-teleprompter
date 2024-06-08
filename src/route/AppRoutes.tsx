@@ -3,6 +3,7 @@ import Home from "../pages/Home.tsx";
 import Settings from "../pages/Settings.tsx";
 import Transcription from "../pages/Transcription.tsx";
 import Models from "../pages/Models.tsx";
+import Live from "../pages/LiveSpeak.tsx"
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/settings" Component={Settings}/>
         <Route path="/transcription" Component={Transcription}/>
         <Route path="/models" Component={Models}/>
+        <Route path="/live" Component={Live}/>
       </Routes>
     </>
   );
