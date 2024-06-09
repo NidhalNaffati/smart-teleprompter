@@ -53,25 +53,34 @@ export default function Settings() {
   };
 
   return (
-    <div>
-      <h1>Settings</h1>
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-3xl font-semibold mb-4">Settings</h1>
       {settings && (
-        <div>
-          <label>Model:</label>
-          <select value={model} onChange={handleModelChange}>
-            {availableModels.map((availableModel) => (
-              <option key={availableModel} value={availableModel}>{availableModel}</option>
-            ))}
-          </select>
-          <br/>
-          <label>Word Similarity Percentage:</label>
-          <input
-            type="number"
-            value={wordSimilarityPercentage}
-            onChange={handleWordSimilarityPercentageChange}
-          />
-          <br/>
-          <button onClick={handleSaveSettings}>Save Settings</button>
+        <div className="flex flex-col space-y-4">
+          <div className="flex flex-col">
+            <label htmlFor="model" className="text-lg font-medium mb-1">Model:</label>
+            <select id="model" value={model} onChange={handleModelChange}
+                    className="border border-gray-300 rounded-lg p-2">
+              {availableModels.map((availableModel) => (
+                <option key={availableModel} value={availableModel}>{availableModel}</option>
+              ))}
+            </select>
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="wordSimilarityPercentage" className="text-lg font-medium mb-1">Word Similarity
+              Percentage:</label>
+            <input
+              id="wordSimilarityPercentage"
+              type="number"
+              value={wordSimilarityPercentage}
+              onChange={handleWordSimilarityPercentageChange}
+              className="border border-gray-300 rounded-lg p-2"
+            />
+          </div>
+          <button onClick={handleSaveSettings}
+                  className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out">Save
+            Settings
+          </button>
         </div>
       )}
     </div>

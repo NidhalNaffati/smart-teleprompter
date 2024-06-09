@@ -17,29 +17,23 @@ const ScriptComparison: React.FC<ComparisonProps> = ({
   const recognizedWords = recognizedText.split(" ");
 
   return (
-    <>
+    <div className="p-4 bg-white dark:bg-zinc-900 rounded-md shadow-md">
       {referenceWords.map((referenceWord, i) => {
         const userWord = recognizedWords[i];
-        const isWordSpelledCorrectly = isWordSimilar(
-          userWord,
-          referenceWord,
-          70
-        );
+        const isWordSpelledCorrectly = isWordSimilar(userWord, referenceWord, 70);
 
         return (
           <span
             key={i}
-            className={`text-2xl transition-colors ${
+            className={`text-xl font-mono transition-colors ${
               isWordSpelledCorrectly ? "text-green-500" : "text-red-500"
-            } ${
-              i === recognizedWords.length - 1 ? "underline" : ""
-            }`}
+            } ${i === recognizedWords.length - 1 ? "underline" : ""}`}
           >
             {referenceWord}{" "}
           </span>
         );
       })}
-    </>
+    </div>
   );
 };
 
